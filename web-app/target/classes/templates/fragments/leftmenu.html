@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <div th:fragment="leftmenu">
+        <aside class="main-sidebar sidebar-light-primary sidebar-collapse">
+            <!-- Brand Logo -->
+            <a href="#" th:href="@{/}" class="brand-link">
+                <span class="brand-text font-weight-light">Paczki</span>
+            </a>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <li class="nav-item">
+                        <a href="#" th:href="@{/}" class="nav-link" th:classappend="${module == 'home' ? 'active':''}" >
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Dashboard
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                    </li>
+                </ul>
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" th:if="${not #lists.isEmpty(platforms)}">
+                        <li class="nav-item" th:each="platform : ${platforms}">
+                            <a href="#" th:href="@{/platform/{platform}(platform=${platform.code})}" class="nav-link" >
+                                <i class="nav-icon fas fa-edit"></i>
+                                <p>
+                                    [[${platform.name}]]
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item" sec:authorize="isAuthenticated()">
+                            <a href="#" th:href="@{/user/changepassword}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Zmień hasło</p>
+                            </a>
+                        </li>
+                        <li class="nav-item"  sec:authorize="hasRole('ADMIN')" >
+                            <a href="#" th:href="@{/user}" class="nav-link">
+                                <i class="nav-icon fas fa-copy"></i>
+                                <p>
+                                    Ustawienia
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="#" th:href="@{/user}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Użytkownik</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" th:href="@{/project}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Projekt</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" th:href="@{/settings}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Ustawienia</p>
+                                    </a>
+                                </li>
+
+
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+    </div>
+</div>
+
+</body>
+</html>

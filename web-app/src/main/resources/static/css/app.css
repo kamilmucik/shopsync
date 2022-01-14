@@ -1,0 +1,12 @@
+td.details-control {
+    background: url('/images/details_open.png') no-repeat center center;
+    cursor: pointer;
+}
+tr.shown td.details-control {
+    background: url('/images/details_close.png') no-repeat center center;
+}
+
+
+[class*="sidebar-light-"], .main-footer, .navbar-light {
+    background-color: #f4f6f9;
+}

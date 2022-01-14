@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: package-webapp  # Service registers under this name
+  thymeleaf:
+    mode: LEGACYHTML5
+    cache: false
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+#    hibernate:
+#      use-new-id-generator-mappings: false
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/zwroty_e_strix_com
+    username: user
+    password: user
+#    driverClassName: org.h2.Driver
+
+jpa:
+  hibernate:
+    ddl-auto: update
+
+server:
+  port: 8088
+  error:
+    path: /error
+
+forceApiMock: @pl.estrix.forceApiMock@
+
+logging:
+  level:
+    ROOT: INFO
+    org.springframework.ws: TRACE

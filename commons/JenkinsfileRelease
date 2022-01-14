@@ -1,0 +1,64 @@
+def runShell(String command){
+    def responseCode = sh returnStatus: true, script: "${command} &> tmp.txt"
+    def output =  readFile(file: "tmp.txt")
+    return (output != "")
+}
+
+pipeline {
+    agent {
+        node {
+            label 'master'
+        }
+    }
+    tools {
+        jdk "OpenJDK11"
+        maven 'Maven'
+    }
+    options {
+        gitLabConnection('GitLab')
+    }
+    parameters {
+        string(name: 'version_release', defaultValue: '1.1.3', description: 'Wersja do publikacji')
+        string(name: 'version_snapshot', defaultValue: '1.1.4-SNAPSHOT', description: 'Wersja rozwojowa')
+        string(name: 'declarative_branch', defaultValue: 'master', description: 'Git branch z którego zostanie zbudowana paczka')
+    }
+    environment {
+        MSTEAMS_HOOK = "https://bankpocztowy.webhook.office.com/webhookb2/61eb2c76-7730-4138-9822-5f42dfb37598@2617b4f8-2cf4-475b-b2fb-62cb5baa4f9d/IncomingWebhook/2371438b09604ff69d116c7c4c4fb03d/64e3a321-3364-49e8-aaf5-ce8f3e33f228"
+        GIT_BRANCH= "${declarative_branch}"
+        GIT_LOCAL_BRANCH= "${declarative_branch}"
+    }
+    stages {
+        stage('Prepare WS') {
+            steps {
+                git(
+                    url: 'https://bpgitlab.bpsa.pl/finanse/envelo-microservice.git',
+                    credentialsId: 'bbd71895-0bd4-481c-8f7a-48c20a46f275',
+                    branch: '${declarative_branch}'
+                )
+            }
+        }
+        stage('Build') {
+            steps {
+                sh "mvn -B -DdevelopmentVersion="+version_snapshot+" -DreleaseVersion="+version_release+" -Dresume=false release:prepare release:perform -f common-module/pom.xml --settings settings.xml -Darguments='-Dmaven.javadoc.skip=true'"
+            }
+        }
+    }
+    post {
+        failure {
+            echo 'Wysypalo sie!'
+        }
+        success {
+            archiveArtifacts artifacts: '**/*.jar'
+            office365ConnectorSend (
+                status: "SUCCESS",
+                webhookUrl: "${MSTEAMS_HOOK}",
+                color: '00ff00',
+                factDefinitions: [
+                    [name: "LINK", template: "http://bpnexus.bpsa.pl:8081/repository/maven-releases/pl/bpsa/service/commons/"+version_release+"/commons-"+version_release+".jar"]
+                ],
+                message: """Commons Serwis w wersji """+version_release+""" została dodany do repozytorium nexus"""
+            )
+        }
+    }
+
+}

@@ -1,0 +1,11 @@
+-------------------------------------------------------------------------------
+Test set: pl.estrix.shopsync.controller.WebControllerTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 1.381 s <<< FAILURE! - in pl.estrix.shopsync.controller.WebControllerTest
+pl.estrix.shopsync.controller.WebControllerTest  Time elapsed: 1.381 s  <<< ERROR!
+java.lang.IllegalStateException: Configuration error: found multiple declarations of @BootstrapWith for test class [pl.estrix.shopsync.controller.WebControllerTest]: [@org.springframework.test.context.BootstrapWith(value=class org.springframework.boot.test.context.SpringBootTestContextBootstrapper), @org.springframework.test.context.BootstrapWith(value=class org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTestContextBootstrapper)]
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:363)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:273)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:238)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:159)
+

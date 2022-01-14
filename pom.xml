@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>pl.estrix.shopsync</groupId>
+  <artifactId>shopsync</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>Shop Sync Manager</name>
+  <description>Shop Synchronize Manger for dropshoping with Wordpress</description>
+
+  <properties>
+    <project.scm.id>git.evb</project.scm.id>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <java.version>1.11</java.version>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+    <stagingDirectory>tmp\site</stagingDirectory>
+    <pl.estrix.forceApiMock>false</pl.estrix.forceApiMock>
+
+    <lombok.version>1.18.12</lombok.version>
+    <org.mapstruct.version>1.2.0.Final</org.mapstruct.version>
+    <immutables.version>2.7.5</immutables.version>
+    <maven.site.path>doxia-site</maven.site.path>
+    <doxiaVersion>1.9.1</doxiaVersion>
+    <querydsl.version>4.1.3</querydsl.version>
+    <mapstruct.version>1.4.1.Final</mapstruct.version>
+
+    <!-- JaCoCo Properties -->
+<!--    <jacoco.version>0.8.6</jacoco.version>-->
+<!--    <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>-->
+<!--    <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>-->
+<!--    <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>-->
+<!--    <sonar.language>java</sonar.language>-->
+  </properties>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.1.18.RELEASE</version>
+  </parent>
+
+  <modules>
+    <module>db-unit</module>
+    <module>commons</module>
+    <module>web-app</module>
+  </modules>
+
+  <dependencyManagement>
+    <dependencies>
+<!--      <dependency>-->
+<!--        <groupId>pl.estrix.shopsync</groupId>-->
+<!--        <artifactId>syncshop-commons</artifactId>-->
+<!--        <version>0.0.1-SNAPSHOT</version>-->
+<!--      </dependency>-->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+        <version>2.1.15.RELEASE</version>
+      </dependency>
+      <dependency>
+        <groupId>uk.co.jemos.podam</groupId>
+        <artifactId>podam</artifactId>
+        <version>6.0.2.RELEASE</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.reflections</groupId>
+        <artifactId>reflections</artifactId>
+        <version>0.9.10</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>${lombok.version}</version>
+        <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>commons-lang</groupId>
+        <artifactId>commons-lang</artifactId>
+        <version>2.6</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>19.0</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.google.code.findbugs</groupId>
+        <artifactId>annotations</artifactId>
+        <version>2.0.1</version>
+      </dependency>
+
+      <dependency>
+        <groupId>javax.validation</groupId>
+        <artifactId>validation-api</artifactId>
+        <version>2.0.1.Final</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.querydsl</groupId>
+        <artifactId>querydsl-jpa</artifactId>
+        <version>${querydsl.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.querydsl</groupId>
+        <artifactId>querydsl-core</artifactId>
+        <version>${querydsl.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-validator</artifactId>
+        <version>5.4.1.Final</version>
+      </dependency>
+
+      <!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
+      <dependency>
+        <groupId>javax.xml.bind</groupId>
+        <artifactId>jaxb-api</artifactId>
+        <version>2.3.0</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.codehaus.jackson</groupId>
+        <artifactId>jackson-core-asl</artifactId>
+        <version>1.1.0</version>
+      </dependency>
+<!--      <dependency>-->
+<!--        <groupId>org.jacoco</groupId>-->
+<!--        <artifactId>jacoco-maven-plugin</artifactId>-->
+<!--        <version>0.8.6</version>-->
+<!--      </dependency>-->
+
+      <dependency>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.7.5.201505241946</version>
+      </dependency>
+
+
+
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.sonarsource.scanner.maven</groupId>
+          <artifactId>sonar-maven-plugin</artifactId>
+          <version>3.4.0.905</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.22.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-report-plugin</artifactId>
+          <version>2.16</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.9.0</version>
+          <configuration>
+            <skipDeploy>true</skipDeploy>
+            <stagingDirectory>
+              ${stagingDirectory}
+            </stagingDirectory>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+  <distributionManagement>
+    <site>
+      <id>www.pocztowy.com</id>
+      <url>scp://www.pocztowy.com/www/docs/project/</url>
+    </site>
+<!--    <repository>-->
+<!--      <id>nexus</id>-->
+<!--      <name>EVB Release</name>-->
+<!--      <url>http://bpnexus.bpsa.pl:8081/repository/maven-releases/</url>-->
+<!--    </repository>-->
+
+<!--    <snapshotRepository>-->
+<!--      <id>nexus</id>-->
+<!--      <name>EVB Snapshot</name>-->
+<!--      <url>http://bpnexus.bpsa.pl:8081/repository/maven-snapshots/</url>-->
+<!--      <uniqueVersion>false</uniqueVersion>-->
+<!--    </snapshotRepository>-->
+  </distributionManagement>
+
+  <scm>
+    <connection>scm:git:https://bpgitlab.bpsa.pl/finanse/envelopackage.git</connection>
+    <developerConnection>scm:git:https://bpgitlab.bpsa.pl/finanse/envelopackage.git</developerConnection>
+    <url>https://bpgitlab.bpsa.pl/finanse/envelopackage.git</url>
+    <tag>envelopackage-1.0.0</tag>
+  </scm>
+
+  <repositories>
+<!--    <repository>-->
+<!--      <id>maven-releases</id>-->
+<!--      <name>maven-releases</name>-->
+<!--      <url>http://bpnexus.bpsa.pl:8081/repository/maven-public/</url>-->
+<!--    </repository>-->
+  </repositories>
+
+  <developers>
+    <developer>
+      <id>kamilmucik</id>
+      <name>Kamil Mucik</name>
+      <email>k.mucik@e-strix.pl</email>
+      <organization>e-strix.pl</organization>
+      <roles>
+        <role>Developer</role>
+      </roles>
+      <timezone>+1</timezone>
+    </developer>
+  </developers>
+  <organization>
+    <name>Kamil Mucik</name>
+    <url>e-strix.pl</url>
+  </organization>
+
+</project>
