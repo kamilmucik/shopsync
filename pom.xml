@@ -4,7 +4,7 @@
 
   <groupId>pl.estrix.shopsync</groupId>
   <artifactId>shopsync</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1</version>
   <packaging>pom</packaging>
 
   <name>Shop Sync Manager</name>
@@ -147,7 +147,7 @@
     <developerConnection>scm:git:file:////Users/kamilmucik/workspace/shopsync</developerConnection>
 <!--    <developerConnection>scm:git:git://github.com/kamilmucik/shopsync.git</developerConnection>-->
     <url>https://github.com/kamilmucik/shopsync.git</url>
-    <tag>HEAD</tag>
+    <tag>shopsync-0.0.1</tag>
   </scm>
 
   <repositories>

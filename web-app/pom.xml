@@ -3,14 +3,14 @@
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>web-app</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1</version>
   <name>Web App</name>
   <packaging>jar</packaging>
 
   <parent>
     <groupId>pl.estrix.shopsync</groupId>
     <artifactId>shopsync</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
   </parent>
   
   <properties>
@@ -136,7 +136,7 @@
             <configuration>
               <excludes>
                 <!-- Removes builder classes used only in JUnit tests from coverage calculation -->
-                <exclude></exclude>
+                <exclude />
               </excludes>
             </configuration>
           </plugin>
