@@ -3,14 +3,14 @@
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>db-unit</artifactId>
-  <version>0.0.2</version>
+  <version>0.0.2-SNAPSHOP</version>
   <name>DB Unit</name>
   <packaging>jar</packaging>
 
   <parent>
     <groupId>pl.estrix.shopsync</groupId>
     <artifactId>shopsync</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.2-SNAPSHOP</version>
   </parent>
 
   <dependencies>
