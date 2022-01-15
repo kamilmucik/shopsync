@@ -4,7 +4,7 @@
 
   <groupId>pl.estrix.shopsync</groupId>
   <artifactId>shopsync</artifactId>
-  <version>0.0.2-SNAPSHOP</version>
+  <version>0.0.2-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Shop Sync Manager</name>
