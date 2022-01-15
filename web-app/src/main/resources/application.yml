@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: package-webapp
+
+server:
+  port: 8088
+
+forceApiMock: @pl.estrix.forceApiMock@
