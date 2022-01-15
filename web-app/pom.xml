@@ -3,14 +3,14 @@
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>web-app</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.2-SNAPSHOT</version>
   <name>Web App</name>
   <packaging>jar</packaging>
 
   <parent>
     <groupId>pl.estrix.shopsync</groupId>
     <artifactId>shopsync</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2-SNAPSHOT</version>
   </parent>
   
   <properties>
