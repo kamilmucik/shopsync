@@ -12,3 +12,19 @@ shopsync -> mvn clean install sonar:sonar -Psonar --settings=settings.xml
 shopsync -> mvn -B -DdevelopmentVersion="0.0.2-SNAPSHOT" -DrleaseVersion="0.0.1" -Dresume=false release:prepare release:perform -DdryRun=true
 
 shopsync -> git reset HEAD~1
+
+#TODO
+## - mock dla serwisów zewnetrznych
+## + testy spock rest, service, DB
+## + sonarqube
+## - profile z bazami danych
+## - pokrycie kody >80
+## - spring-security
+## - skrypty flyway
+## - jmeter
+## - postman
+## - Api dla mobilki
+## - panel web
+## - kolejka z zadaniami do wykonania
+## - Podłączenie JMXa jolokia
+## - 
