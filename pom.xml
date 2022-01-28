@@ -35,14 +35,18 @@
     <sonar.projectKey>${project.artifactId}</sonar.projectKey>
     <sonar.buildbreaker.skip>true</sonar.buildbreaker.skip>
     <sonar.exclusions>
-      **/SpringBootWebApplication.java
+      **/SpringBootWebApplication.java,**/commons/**
     </sonar.exclusions>
     <sonar.dependencyCheck.htmlReportPath>./target/dependency-check-report.html</sonar.dependencyCheck.htmlReportPath>
     <sonar.dependencyCheck.jsonReportPath>./target/dependency-check-report.json</sonar.dependencyCheck.jsonReportPath>
     <jacoco.maven.plugin.version>0.8.5</jacoco.maven.plugin.version>
     <jacoco.reportPath>${project.build.directory}/jacoco.exec</jacoco.reportPath>
 
-
+    <lombok.version>1.18.12</lombok.version>
+    <org.mapstruct.version>1.2.0.Final</org.mapstruct.version>
+    <immutables.version>2.7.5</immutables.version>
+    <querydsl.version>4.1.3</querydsl.version>
+    <mapstruct.version>1.4.1.Final</mapstruct.version>
   </properties>
 
   <parent>
@@ -70,7 +74,86 @@
         <version>${jacoco.maven.plugin.version}</version>
       </dependency>
 
+      <dependency>
+        <groupId>uk.co.jemos.podam</groupId>
+        <artifactId>podam</artifactId>
+        <version>6.0.2.RELEASE</version>
+      </dependency>
 
+      <dependency>
+        <groupId>org.reflections</groupId>
+        <artifactId>reflections</artifactId>
+        <version>0.9.10</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>${lombok.version}</version>
+        <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>commons-lang</groupId>
+        <artifactId>commons-lang</artifactId>
+        <version>2.6</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>19.0</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.google.code.findbugs</groupId>
+        <artifactId>annotations</artifactId>
+        <version>2.0.1</version>
+      </dependency>
+
+      <dependency>
+        <groupId>javax.validation</groupId>
+        <artifactId>validation-api</artifactId>
+        <version>2.0.1.Final</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.querydsl</groupId>
+        <artifactId>querydsl-jpa</artifactId>
+        <version>${querydsl.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.querydsl</groupId>
+        <artifactId>querydsl-core</artifactId>
+        <version>${querydsl.version}</version>
+      </dependency>
+
+
+      <dependency>
+        <groupId>org.mapstruct</groupId>
+        <artifactId>mapstruct</artifactId>
+        <version>${mapstruct.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-validator</artifactId>
+        <version>5.4.1.Final</version>
+      </dependency>
+
+      <!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
+      <dependency>
+        <groupId>javax.xml.bind</groupId>
+        <artifactId>jaxb-api</artifactId>
+        <version>2.3.0</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.codehaus.jackson</groupId>
+        <artifactId>jackson-core-asl</artifactId>
+        <version>1.1.0</version>
+      </dependency>
 
       <dependency>
         <groupId>org.springframework.boot</groupId>
@@ -104,8 +187,8 @@
       <dependency> <!-- enables mocking of classes (in addition to interfaces) -->
         <groupId>net.bytebuddy</groupId>
         <artifactId>byte-buddy</artifactId>
-        <version>1.9.9</version>
-        <scope>test</scope>
+        <version>1.12.7</version>
+<!--        <scope>test</scope>-->
       </dependency>
       <dependency> <!-- enables mocking of classes without default constructor (together with CGLIB) -->
         <groupId>org.objenesis</groupId>
