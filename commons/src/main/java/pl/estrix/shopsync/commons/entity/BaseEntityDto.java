@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-@AllArgsConstructor
+//@AllArgsConstructor
 public abstract class BaseEntityDto<T> extends BaseDto implements EntityDto<T> {
 
     private T id;
