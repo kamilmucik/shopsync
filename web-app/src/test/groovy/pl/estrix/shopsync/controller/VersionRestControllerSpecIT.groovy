@@ -17,6 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Integration Test for Version Controller.
  */
+
 @SpringBootTest
 @AutoConfigureMockMvc
 class VersionRestControllerSpecIT extends Specification{

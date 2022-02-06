@@ -1,4 +1,4 @@
-package dev.macpherson.example.springboot2spock.domain.entity;
+package pl.estrix.shopsync.model;
 
 /**
  * Planet representation.

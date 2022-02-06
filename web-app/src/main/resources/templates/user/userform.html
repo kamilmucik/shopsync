@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+<head lang="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="e-strix Kamil Mucik">
+
+    <title>Synchronizacja sklepów 3</title>
+
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+
+    <!--/*/ <th:block th:include="fragments/navbar :: navbar"></th:block> /*/-->
+
+    <!-- Main Sidebar Container -->
+    <!--/*/ <th:block th:include="fragments/leftmenu :: leftmenu"></th:block> /*/-->
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#" th:href="@{/}">Home</a></li>
+                            <li class="breadcrumb-item active">DataTables</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <!-- /.row -->
+                <div class="row">
+                    <!-- left column -->
+                    <div class="col-md-12">
+                        <!-- jquery validation -->
+                        <div class="card card-info">
+                            <div class="card-header">
+                                <h3 class="card-title">Użytkownik <small>: dodaj</small></h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <!-- form start -->
+                            <form class="form-horizontal" th:object="${userDto}" th:action="@{/user/add}" method="post">
+                                <input type="hidden" th:field="*{id}"/>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="userName">userName</label>
+                                        <input type="text" name="userName" class="form-control " id="userName" placeholder="name" aria-describedby="userName-error" aria-invalid="true" th:classappend="${#fields.hasErrors('userName')} ? 'is-invalid' : ''" th:field="*{userName}">
+                                        <span id="userName-error" class="error invalid-feedback" th:errors="*{userName}">Error</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="userLastname">userLastname</label>
+                                        <input type="text" name="userLastname" class="form-control " id="userLastname" placeholder="lastname" aria-describedby="userLastname-error" aria-invalid="true" th:classappend="${#fields.hasErrors('userLastname')} ? 'is-invalid' : ''" th:field="*{userLastname}">
+                                        <span id="userLastname-error" class="error invalid-feedback" th:errors="*{userLastname}">Error</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">email</label>
+                                        <input type="text" name="email" class="form-control " id="email" placeholder="name@email.pl" aria-describedby="email-error" aria-invalid="true" th:classappend="${#fields.hasErrors('email')} ? 'is-invalid' : ''" th:field="*{email}">
+                                        <span id="email-error" class="error invalid-feedback" th:errors="*{email}">Error</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">password</label>
+                                        <input type="password" name="password" class="form-control " id="password" placeholder="password" aria-describedby="password-error" aria-invalid="true" th:classappend="${#fields.hasErrors('password')} ? 'is-invalid' : ''" th:field="*{password}">
+                                        <span id="password-error" class="error invalid-feedback" th:errors="*{password}">Error</span>
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary">Zapisz</button>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!--/.col (left) -->
+                    <!-- right column -->
+                    <div class="col-md-6">
+
+                    </div>
+                    <!--/.col (right) -->
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+
+    <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+            <b>Version</b> [[${appversion}]]
+        </div>
+        &nbsp;
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+</body>
+</html>

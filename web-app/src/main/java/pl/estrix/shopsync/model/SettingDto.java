@@ -12,7 +12,6 @@ import java.time.LocalTime;
 
 @Setter
 @Getter
-//@EqualsAndHashCode(callSuper = true)
 @ToString
 public class SettingDto extends BaseEntityDto<Long> {
 
@@ -23,7 +22,7 @@ public class SettingDto extends BaseEntityDto<Long> {
 
     @Builder
     public SettingDto(Long id, String label, LocalDate dateCreate, LocalTime timeCreate, LocalDateTime lastUpdated, String name, String type, String code, String value) {
-        super(id, label, dateCreate, timeCreate, lastUpdated);
+//        super(id, label, dateCreate, timeCreate, lastUpdated);
         this.name = name;
         this.type = type;
         this.code = code;

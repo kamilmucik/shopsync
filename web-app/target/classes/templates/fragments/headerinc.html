@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:fragment="head">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <script src="http://cdn.jsdelivr.net/webjars/jquery/3.5.1/jquery.min.js"
+                th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+
+    <script src="/js/datatable.js" th:src="@{/webjars/font-awesome/5.15.2/js/all.min.js}" ></script>
+    <link href="/css/dataTables.bootstrap4.min.css" th:href="@{/css/dataTables.bootstrap4.min.css}" rel="stylesheet"/>
+    <link href="/css/responsive.bootstrap4.min.css" th:href="@{/css/responsive.bootstrap4.min.css}" rel="stylesheet"/>
+    <link href="/css/buttons.bootstrap4.min.css" th:href="@{/css/buttons.bootstrap4.min.css}" rel="stylesheet"/>
+    <link href="/css/adminlte.min.css" th:href="@{/css/adminlte.min.css}" rel="stylesheet"/>
+    <link href="/css/jquery.dataTables.min.css" th:href="@{/css/jquery.dataTables.min.css}" rel="stylesheet"/>
+
+
+    <link href="/css/app.css" th:href="@{/css/app.css}" rel="stylesheet"/>
+
+
+    <script src="/js/adminlte.js" th:src="@{/js/adminlte.js}"></script>
+    <script src="/js/jquery.dataTables.min.js" th:src="@{/js/jquery.dataTables.min.js}"></script>
+
+
+    <script src="/js/common.js" th:src="@{/js/common.js}" ></script>
+    <script src="/js/datatable.js" th:src="@{/js/datatable.js}" ></script>
+
+    <script>
+
+        $('[data-widget="pushmenu"]').PushMenu("toggle");
+    </script>
+
+</head>
+<body>
+
+</body>
+</html>

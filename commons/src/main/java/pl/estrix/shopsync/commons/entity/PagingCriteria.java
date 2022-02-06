@@ -1,5 +1,6 @@
 package pl.estrix.shopsync.commons.entity;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
@@ -15,6 +16,8 @@ public class PagingCriteria {
     Integer page;
     int start;
     Integer limit;
+    String orderColumn;
+    String orderDir;
 
     /**
      * @return empty immutable instance of PagingCriteria
@@ -41,3 +44,4 @@ public class PagingCriteria {
 
     };
 }
+
