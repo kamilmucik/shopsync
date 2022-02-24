@@ -11,7 +11,7 @@ import pl.estrix.shopsync.tool.deserializer.StringRemapIdDeserializer;
 import pl.estrix.shopsync.tool.serializer.StringRemapIdSerializer;
 
 @SuppressWarnings("serial")
-public class CustomObjectMapper extends ObjectMapper{
+    public class CustomObjectMapper extends ObjectMapper{
 
     public CustomObjectMapper() {
         super();
