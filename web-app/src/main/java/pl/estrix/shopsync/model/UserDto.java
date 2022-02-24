@@ -15,9 +15,9 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserDto extends BaseEntityDto<Long> {
-
-    private Long id;
+public class UserDto extends BaseEntityDto<String> {
+    @RemapId(value = "productId", useSalt = false)
+    private String id;
 
     @RemapId(value = "productId", useSalt = false)
     private String idMap;

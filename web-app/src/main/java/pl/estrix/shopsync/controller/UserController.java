@@ -9,13 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.estrix.shopsync.model.UserDto;
 import pl.estrix.shopsync.model.UserPasswordDto;
 import pl.estrix.shopsync.service.UserService;
+import pl.estrix.shopsync.tool.SessionUtil;
 
 import javax.validation.Valid;
 
@@ -57,8 +55,11 @@ public class UserController {
     @RequestMapping("/edit/{id}")
     public String edit(
             UserDto userDto,
-            @PathVariable Long id, Model model){
-        userDto = userService.getById(id);
+            @RequestParam(required = false) String id, Model model){
+        String session = SessionUtil.getSessionKey();
+        String ulId = userDto.getId().replace(session,"").substring(1);
+        Long lId = Long.parseLong(ulId);
+        userDto = userService.getById(lId);
         model.addAttribute("userDto", userDto);
         model.addAttribute("module","platform");
         return "user/userform";
