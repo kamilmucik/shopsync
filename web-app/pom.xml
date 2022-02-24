@@ -26,6 +26,9 @@
     </dependency>
 
 
+
+
+
     <!-- https://mvnrepository.com/artifact/net.bytebuddy/byte-buddy -->
 <!--    <dependency>-->
 <!--      <groupId>net.bytebuddy</groupId>-->
@@ -169,6 +172,14 @@
       <artifactId>hamcrest-core</artifactId>
       <scope>test</scope>
     </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.6</version>
+    </dependency>
+
   </dependencies>
 
   <profiles>

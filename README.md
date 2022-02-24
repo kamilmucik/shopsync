@@ -19,12 +19,12 @@ shopsync -> git reset HEAD~1
 ## + sonarqube
 ## - profile z bazami danych
 ## - pokrycie kody >80
-## - spring-security
+## + spring-security
 ## - skrypty flyway
 ## - jmeter
 ## - postman
 ## - Api dla mobilki
-## - panel web
+## + panel web
 ## - kolejka z zadaniami do wykonania
 ## - Podłączenie JMXa jolokia
 ## - 

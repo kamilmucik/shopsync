@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "app_setting",
+@Table(name = "appsetting",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = {"id"})
         })
