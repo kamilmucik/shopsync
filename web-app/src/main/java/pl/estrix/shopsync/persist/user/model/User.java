@@ -6,7 +6,7 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "app_user",
+@Table(name = "appuser",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = {"id"}),
                 @UniqueConstraint(columnNames = {"email"}, name = "uidx_user_email")

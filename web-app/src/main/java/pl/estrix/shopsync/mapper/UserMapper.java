@@ -1,8 +1,6 @@
 package pl.estrix.shopsync.mapper;
 
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
+import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 import pl.estrix.shopsync.model.UserDto;
 import pl.estrix.shopsync.persist.user.model.User;
@@ -17,6 +15,11 @@ public interface UserMapper {
         @Mapping(target = "userLastname", source = "lastName"),
     })
     UserDto map(User source);
+
+    @AfterMapping
+    default void afterMapping(@MappingTarget UserDto target, User source) {
+        target.setIdMap(source.getId().toString());
+    }
 
     @Mappings({
             @Mapping(target = "firstName", source = "userName"),

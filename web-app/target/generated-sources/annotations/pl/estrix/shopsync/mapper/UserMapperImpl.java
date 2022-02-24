@@ -7,7 +7,7 @@ import pl.estrix.shopsync.persist.user.model.User;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-02-06T23:21:20+0100",
+    date = "2022-02-24T01:34:29+0100",
     comments = "version: 1.2.0.Final, compiler: javac, environment: Java 11.0.2 (Oracle Corporation)"
 )
 @Component
@@ -29,6 +29,8 @@ public class UserMapperImpl implements UserMapper {
         userDto.setRole( source.getRole() );
         userDto.setEnabled( source.isEnabled() );
         userDto.setLocked( source.isLocked() );
+
+        afterMapping( userDto, source );
 
         return userDto;
     }
