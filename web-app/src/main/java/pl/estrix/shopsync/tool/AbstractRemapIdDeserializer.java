@@ -30,13 +30,6 @@ public abstract class AbstractRemapIdDeserializer<T> extends StdDeserializer<T> 
         this.remapId = remapId;
     }
 
-    Boolean useSalt = false;
-
-//    private CryptConf getCryptConf(String session) {
-//        return new CryptConf(useSalt, session, session + "productId";
-//    }
-
-
     public JsonDeserializer<T> createContextual(DeserializationContext ctxt,
                                                 BeanProperty beanProperty){
         RemapId remapId = beanProperty == null ? null : beanProperty.getAnnotation(RemapId.class);
@@ -67,23 +60,7 @@ public abstract class AbstractRemapIdDeserializer<T> extends StdDeserializer<T> 
         }
     }
 
-    private String getSesionKey(){
-        try {
-            HttpServletRequest requet =
-                    ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes()))
-                            .getRequest();
-            return requet.getHeader("sessionkey");
-        }catch (NullPointerException e){
-            return StringUtils.EMPTY;
-        }
-    }
-
     private boolean shouldBeDecrypted() {
         return remapId != null && isEmpty(remapId.supportedValues());
     }
-
-//    private String decrypt(String message, CryptConf cryptConf) {
-//        CryptUtil cryptUtil = CryptUtil.INSTANCE;
-//        retur cryptUtil.decryptRemapId(message, cryptConf);
-//    }
 }

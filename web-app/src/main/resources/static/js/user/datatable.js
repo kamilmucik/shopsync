@@ -20,7 +20,7 @@ $(document).ready( function () {
                    "width": "20%",
                    "orderable":      false,
                    "render": function (data, type, row) {
-                       return "<a href='/user/edit/" + row.id + "'>Edytuj</a> | <a style='color: red;'href='/user/delete/" + row.id + "'>Usuń</a>";
+                       return "<a href='/user/edit/" + row.idMap + "'>Edytuj</a> | <a style='color: red;'href='/user/delete/" + row.id + "'>Usuń</a>";
                    }
                }
             ],
