@@ -1,5 +1,6 @@
 
 INSERT INTO appsetting ( setting_code , setting_name , setting_type , setting_value ) VALUES ('3','3','3','3');
+INSERT INTO appsetting ( setting_code , setting_name , setting_type , setting_value ) VALUES ('code','name','type','value');
 
 INSERT INTO appuser (email, is_enabled, first_name, last_name, is_locked, password, role_name) VALUES
 ('user@estrix.pl', 1, 'user', 'github', 0, '36767690feffd782e729ae821dff3355dda8ad40896263c007ad5a372cac7edc6da6cefca1bcdb11', 'ROLE_USER');

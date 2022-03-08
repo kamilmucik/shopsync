@@ -52,12 +52,13 @@ public class UserController {
         return "redirect:/user";
     }
 
-    @RequestMapping("/edit/{id}")
+    @RequestMapping("/edit/{idMap}")
     public String edit(
             UserDto userDto,
-            @RequestParam(required = false) String id, Model model){
+            @RequestParam(required = false) String hashId, Model model){
         String session = SessionUtil.getSessionKey();
-        String ulId = userDto.getId().replace(session,"").substring(1);
+        String ulId = userDto.getIdMap().replace(session,"").substring(1);
+
         Long lId = Long.parseLong(ulId);
         userDto = userService.getById(lId);
         model.addAttribute("userDto", userDto);

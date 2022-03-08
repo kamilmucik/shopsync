@@ -110,11 +110,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/platform/add",
                         "/platform/add/",
                         "/platform/*/add/**",
-                        "/platform/*/delete/**")
+                        "/platform/*/delete/**",
+                        "/setting/form/*","/setting/edit/*","/setting/**"
+                )
                         .hasAnyRole("ADMIN")
                 .antMatchers(
-                        "/user/edit/*",
-                        "/user/**")
+                        "/user/edit/*","/user/**"
+                )
                         .hasAnyRole("USER","ADMIN")
                 .anyRequest().authenticated()
                 .and()
