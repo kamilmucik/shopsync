@@ -7,7 +7,7 @@ import pl.estrix.shopsync.model.VersionDto;
 import pl.estrix.shopsync.persist.version.VersionExecutor;
 import pl.estrix.shopsync.service.VersionService;
 
-//@Slf4j
+
 @Service("versionService")
 @Primary
 @ReplaceableComponent

@@ -1,9 +1,11 @@
 package pl.estrix.shopsync.persist.user.model;
 import lombok.*;
+import pl.estrix.shopsync.persist.setting.model.AppSetting;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.Comparator;
 
 @Entity
 @Table(name = "appuser",
@@ -16,7 +18,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Builder
 @EqualsAndHashCode(callSuper = false)
-public class User implements Serializable {
+public class User implements Serializable,Comparable<User> {
 
     @Id
     @Column(name = "ID", nullable = false)
@@ -47,4 +49,13 @@ public class User implements Serializable {
     //    @Enumerated(EnumType.STRING)
     @Column(name = "role_name", length = 20)
     private String role;
+
+    @Override
+    public int compareTo(@NonNull User o) {
+        return Comparator.comparing(User::getFirstName)
+                .thenComparing(User::getLastName)
+                .thenComparing(User::getEmail)
+                .thenComparing(User::getRole)
+                .compare(this, o);
+    }
 }

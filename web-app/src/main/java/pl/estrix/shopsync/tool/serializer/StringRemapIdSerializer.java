@@ -5,7 +5,6 @@ import pl.estrix.shopsync.tool.AbstractRemapIdSerializer;
 
 import java.io.IOException;
 
-@SuppressWarnings("serial")
 public class StringRemapIdSerializer extends AbstractRemapIdSerializer<String>{
 
     public StringRemapIdSerializer() {
@@ -14,11 +13,7 @@ public class StringRemapIdSerializer extends AbstractRemapIdSerializer<String>{
 
     @Override
     public void serialize(String value, JsonGenerator jsonGenerator, SerializerProvider provider) throws IOException {
-        try {
-            serialize(value, jsonGenerator);
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        }
+        serialize(value, jsonGenerator);
     }
 
     @Override

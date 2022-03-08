@@ -1,45 +1,39 @@
 package pl.estrix.shopsync.config;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.access.AccessDecisionVoter;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
-import org.springframework.security.access.vote.AffirmativeBased;
 import org.springframework.security.access.vote.RoleHierarchyVoter;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
-import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
-import org.springframework.security.web.access.expression.WebExpressionVoter;
-import pl.estrix.shopsync.service.UserLoginServiceExt;
 import pl.estrix.shopsync.service.impl.UserLoginServiceExtImpl;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 @EnableWebSecurity
 @Configuration
+@AllArgsConstructor
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private RoleHierarchy roleHierarchy;
+    private final RoleHierarchy roleHierarchy;
 
-    @Autowired
-    private AccessDeniedHandler accessDeniedHandler;
-    @Autowired
-    private UserLoginServiceExt userLoginServiceExt;
+    private final AccessDeniedHandler accessDeniedHandler;
 
-
+    /**
+     * BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+     * System.out.println("encoder:  " + encoder.encode("test"));
+     * @return PasswordEncoder
+     */
     @Bean(name = "standardPasswordEncoder")
     public PasswordEncoder standardPasswordEncoder() {
-        return new StandardPasswordEncoder("supersecret");
+        return new BCryptPasswordEncoder();
     }
 
     @Override
@@ -60,38 +54,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(standardPasswordEncoder());
     }
 
-//    @Bean
-//    public DefaultWebSecurityExpressionHandler webSecurityExpressionHandler() {
-//        DefaultWebSecurityExpressionHandler webSecurityExpressionHandler = new DefaultWebSecurityExpressionHandler();
-//        webSecurityExpressionHandler.setRoleHierarchy(roleHierarchy);
-//        return webSecurityExpressionHandler;
-//    }
-
-//    @Bean
-//    public WebExpressionVoter webExpressionVoter() {
-//        WebExpressionVoter webExpressionVoter = new WebExpressionVoter();
-//        webExpressionVoter.setExpressionHandler(webSecurityExpressionHandler());
-//        return webExpressionVoter;
-//    }
-
-//    @Bean
-//    public AffirmativeBased accessDecisionManager() {
-//        List<AccessDecisionVoter<?>> decisionVoterList = new ArrayList<>();
-//        decisionVoterList.add(roleHierarchyVoter());
-//        decisionVoterList.add(webExpressionVoter());
-//        return new AffirmativeBased(decisionVoterList);
-//    }
-
-
-//    // create two users, admin and user
-//    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication()
-//                .withUser("user").password("{noop}user").roles("USER")
-//                .and()
-//                .withUser("admin").password("{noop}admin").roles("ADMIN");
-//    }
-
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
@@ -100,17 +62,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/css/**","/js/**","/images/**","/webjars/**","/webfonts/**","/h2/**").permitAll()
                 .antMatchers(
                         "/", "/home", "/about", "/list", "/version",
-                        "/versions/list", "/login",
-                        "/form/add","/form/add/**","/results",
-                        "/platform","/platform/*",
-                        "/products", "/productshow", "/productform").permitAll()
+                        "/login").permitAll()
                 .antMatchers(
                         "/admin/**",
-                        "/platform/*/edit/**",
-                        "/platform/add",
-                        "/platform/add/",
-                        "/platform/*/add/**",
-                        "/platform/*/delete/**",
                         "/setting/form/*","/setting/edit/*","/setting/**"
                 )
                         .hasAnyRole("ADMIN")
@@ -130,8 +84,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
     }
-
-
 
 
 }

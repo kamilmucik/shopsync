@@ -1,4 +1,4 @@
-package pl.estrix.shopsync;
+package pl.estrix.shopsync
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -17,7 +17,7 @@ class SpringBootWebApplicationSpecIT extends Specification {
     def "test context loads"() {
         expect:
         context != null
-//		context.containsBean("settingRepository")
+		context.containsBean("userCommandExecutor")
 //		context.containsBean("helloWorldService")
 //		context.containsBean("simpleBootApp")
 //		context.containsBean("scopedHelloWorldService")

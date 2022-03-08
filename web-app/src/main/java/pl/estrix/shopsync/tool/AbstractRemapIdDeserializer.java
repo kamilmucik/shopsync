@@ -26,9 +26,9 @@ public abstract class AbstractRemapIdDeserializer<T> extends StdDeserializer<T> 
 
     public JsonDeserializer<T> createContextual(DeserializationContext ctxt,
                                                 BeanProperty beanProperty){
-        RemapId remapId = beanProperty == null ? null : beanProperty.getAnnotation(RemapId.class);
+        RemapId remapIdTmp = beanProperty == null ? null : beanProperty.getAnnotation(RemapId.class);
 
-        AbstractRemapIdDeserializer<T> deserializer = createDeserializerForRemap(remapId);
+        AbstractRemapIdDeserializer<T> deserializer = createDeserializerForRemap(remapIdTmp);
         if (deserializer!= null) {
             return deserializer;
         }
@@ -48,7 +48,6 @@ public abstract class AbstractRemapIdDeserializer<T> extends StdDeserializer<T> 
     protected String deserialize(String message) {
         if (shouldBeDecrypted()) {
             return message.substring(4);
-//            return decrypt(message, getCryptConf(getSessionKey()));
         } else {
             return message;
         }

@@ -25,7 +25,7 @@ public class UserRepositoryImpl extends QueryDslRepositorySupportBase implements
 
     @Override
     public List<User> find(UserSearchCriteriaDto searchCriteria, PagingCriteria pagingCriteria) {
-        JPQLQuery query = getQueryForFind(searchCriteria);
+        JPQLQuery<User> query = getQueryForFind(searchCriteria);
         query.orderBy(getSortedColumn(Order.valueOf(pagingCriteria.getOrderDir()),pagingCriteria.getOrderColumn()));
         addPagingCriteriaToQuery(query, pagingCriteria);
         return query.fetch();
@@ -33,7 +33,7 @@ public class UserRepositoryImpl extends QueryDslRepositorySupportBase implements
 
     @Override
     public long findCount(UserSearchCriteriaDto searchCriteria) {
-        JPQLQuery query = getQueryForFind(searchCriteria);
+        JPQLQuery<User> query = getQueryForFind(searchCriteria);
         return query.fetchCount();
     }
 
@@ -41,14 +41,14 @@ public class UserRepositoryImpl extends QueryDslRepositorySupportBase implements
      * fieldName - name of field from Person entity
      */
     private OrderSpecifier<?> getSortedColumn(Order order, String fieldName){
-        Path<Object> fieldPath = Expressions.path(Object.class, QUser.user, fieldName);
-        return new OrderSpecifier(order, fieldPath);
+        Path<User> fieldPath = Expressions.path(User.class, QUser.user, fieldName);
+        return new OrderSpecifier<>(order, fieldPath);
     }
 
-    private JPQLQuery getQueryForFind(UserSearchCriteriaDto searchParams) {
+    private JPQLQuery<User> getQueryForFind(UserSearchCriteriaDto searchParams) {
         BooleanBuilder builder = new BooleanBuilder();
 
-        JPQLQuery query = from(user);
+        JPQLQuery<User> query = from(user);
 
         if (StringUtils.isNotEmpty(searchParams.getSearch())){
             query.where(

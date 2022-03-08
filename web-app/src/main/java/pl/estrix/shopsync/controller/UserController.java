@@ -1,7 +1,7 @@
 package pl.estrix.shopsync.controller;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,23 +19,29 @@ import javax.validation.Valid;
 
 @Slf4j
 @Controller
+@AllArgsConstructor
 @RequestMapping(value = "/user")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private static final String PASSWORD_FIELD = "userPasswordDto";
+    private static final String SITE_INDEX = "user/index";
+    private static final String SITE_PASSWORD = "user/changepassword";
+    private static final String SITE_FORM = "user/userform";
+    private static final String SITE_SUCCESS_REDIRECT = "redirect:/user";
+
+    private final UserService userService;
+
+    private final PasswordEncoder standardPasswordEncoder;
 
     @RequestMapping("")
     public String user(Model model) {
-        model.addAttribute("module","user");
-        return "user/index";
+        setModule(model,"user");
+        return SITE_INDEX;
     }
 
     @GetMapping("/add")
-    public String showForm(
-            UserDto userDto,
-            Model model) {
-        return "user/userform";
+    public String add() {
+        return SITE_FORM;
     }
 
     @PostMapping("/add")
@@ -45,11 +51,11 @@ public class UserController {
             Model model) {
 
         if (bindingResult.hasErrors()) {
-            return "user/userform";
+            return SITE_FORM;
         }
         userService.save(userDto);
 
-        return "redirect:/user";
+        return SITE_SUCCESS_REDIRECT;
     }
 
     @RequestMapping("/edit/{idMap}")
@@ -62,15 +68,15 @@ public class UserController {
         Long lId = Long.parseLong(ulId);
         userDto = userService.getById(lId);
         model.addAttribute("userDto", userDto);
-        model.addAttribute("module","platform");
-        return "user/userform";
+        setModule(model,"platform");
+        return SITE_FORM;
     }
 
     @RequestMapping("/delete/{id}")
     public String delete(@PathVariable Long id, Model model){
         userService.deleteById(id);
-        model.addAttribute("module","platform");
-        return "redirect:/user";
+        setModule(model,"platform");
+        return SITE_SUCCESS_REDIRECT;
     }
 
     @GetMapping("/changepassword")
@@ -81,13 +87,9 @@ public class UserController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         userPasswordDto.setLogin(auth.getName());
-        model.addAttribute("userPasswordDto",userPasswordDto);
-        return "user/changepassword";
+        model.addAttribute(PASSWORD_FIELD,userPasswordDto);
+        return SITE_PASSWORD;
     }
-
-
-    @Autowired
-    private PasswordEncoder standardPasswordEncoder;
 
     @PostMapping("/changepassword")
     public String changePasswordCheck(
@@ -98,22 +100,31 @@ public class UserController {
         UserDto userDto = userService.getByLogin(userPasswordDto.getLogin());
 
         if (!standardPasswordEncoder.matches(userPasswordDto.getOldPassword(), userDto.getPassword())) {
-            FieldError error = new FieldError("userPasswordDto", "oldPassword",
+            FieldError error = new FieldError(PASSWORD_FIELD, "oldPassword",
                     "Stare hasło nie jest zgodne.");
             bindingResult.addError(error);
         }
         if (!userPasswordDto.getNewPassword().equals(userPasswordDto.getRepeatPassword())) {
-            FieldError error = new FieldError("userPasswordDto", "repeatPassword",
+            FieldError error = new FieldError(PASSWORD_FIELD, "repeatPassword",
                     "Hasła muszą być takie same.");
             bindingResult.addError(error);
         }
 
         if (bindingResult.hasErrors()) {
-            return "user/changepassword";
+            return SITE_PASSWORD;
         }
         userDto.setPassword(userPasswordDto.getNewPassword());
         userService.save(userDto);
 
-        return "redirect:/user";
+        return SITE_SUCCESS_REDIRECT;
+    }
+
+    /**
+     * Set module in model
+     * @param model
+     * @param moduleName
+     */
+    private void setModule(Model model, String moduleName){
+        model.addAttribute("module",moduleName);
     }
 }

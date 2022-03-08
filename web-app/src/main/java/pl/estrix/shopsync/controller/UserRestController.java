@@ -1,11 +1,8 @@
 package pl.estrix.shopsync.controller;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.estrix.shopsync.commons.core.domain.paging.Page;
 import pl.estrix.shopsync.commons.core.domain.paging.PagingRequest;
 import pl.estrix.shopsync.model.UserDto;
@@ -13,16 +10,14 @@ import pl.estrix.shopsync.service.UserService;
 
 @Slf4j
 @RestController
+@AllArgsConstructor
 @RequestMapping(value = "/user")
 public class UserRestController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
-    @RequestMapping(path="/list", method=RequestMethod.POST)
+    @PostMapping(path="/list")
     public Page<UserDto> list(@RequestBody PagingRequest pagingRequest) {
         return userService.getUsers(pagingRequest);
     }
-
-
 }

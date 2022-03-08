@@ -7,7 +7,6 @@ import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration;
-import org.springframework.security.crypto.password.StandardPasswordEncoder;
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
@@ -25,10 +24,5 @@ public class MethodSecurityConfig extends GlobalMethodSecurityConfiguration {
         DefaultMethodSecurityExpressionHandler methodSecurityExpressionHandler = new DefaultMethodSecurityExpressionHandler();
         methodSecurityExpressionHandler.setRoleHierarchy(roleHierarchy());
         return methodSecurityExpressionHandler;
-    }
-
-    public static void main(String[] args) {
-        StandardPasswordEncoder spe = new StandardPasswordEncoder("supersecret");
-        System.out.println(spe.encode("dupa"));
     }
 }

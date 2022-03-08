@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import pl.estrix.shopsync.model.UserDto;
 import pl.estrix.shopsync.persist.user.executor.UserCommandExecutor;
 import pl.estrix.shopsync.persist.user.model.Role;
-import pl.estrix.shopsync.model.UserDto;
 import pl.estrix.shopsync.service.UserLoginServiceExt;
 
 import java.util.ArrayList;
@@ -33,15 +32,12 @@ public class UserLoginServiceExtImpl implements UserLoginServiceExt {
 
         List<Role> roles = new ArrayList<>();
         roles.add(Role.valueOf(user.getRole()));
-        Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+        Collection<GrantedAuthority> authorities = new ArrayList<>();
         for (Role role : roles) {
             authorities.add(new SimpleGrantedAuthority(role.toString()));
         }
         boolean enabled = user.isEnabled();
-        boolean accountNonExpired = true;
-        boolean credentialsNonExpired = true;
         boolean accountNonLocked = !user.isLocked();
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
-
+        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), enabled, true, true, accountNonLocked, authorities);
     }
 }

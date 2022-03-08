@@ -28,12 +28,12 @@ public abstract class AbstractRemapIdSerializer<T> extends StdSerializer<T>  imp
     }
 
     public JsonSerializer<?> createContextual(SerializerProvider prov, BeanProperty beanProperty) {
-        RemapId remapId = getRemapId(beanProperty);
+        RemapId remapIdTmp = getRemapId(beanProperty);
 
-        if (remapId != null) {
-            validateRemapIdAttributes(remapId);
+        if (remapIdTmp != null) {
+            validateRemapIdAttributes(remapIdTmp);
             AbstractRemapIdSerializer<T> serializer = createInstance();
-            serializer.init(remapId);
+            serializer.init(remapIdTmp);
             return serializer;
         }
 
@@ -48,7 +48,7 @@ public abstract class AbstractRemapIdSerializer<T> extends StdSerializer<T>  imp
         checkArgument(isNotBlank(remapId.value()));
     }
 
-    protected void serialize(String value, JsonGenerator jsonGenerator) throws IOException, NoSuchFieldException {
+    protected void serialize(String value, JsonGenerator jsonGenerator) throws IOException {
         if (shouldBeEncrypted()) {
             String session = SessionUtil.getSessionKey();
             jsonGenerator.writeString(session+"_"+value);

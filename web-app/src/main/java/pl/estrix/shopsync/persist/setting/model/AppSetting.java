@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Comparator;
 
 @Entity
 @Table(name = "appsetting",
@@ -15,7 +16,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Builder
 @EqualsAndHashCode(callSuper = false)
-public class AppSetting implements Serializable {
+public class AppSetting implements Serializable,Comparable<AppSetting> {
 
     @Id
     @GeneratedValue
@@ -32,4 +33,13 @@ public class AppSetting implements Serializable {
 
     @Column(name = "setting_type", length = 250, nullable = false)
     private String type;
+
+    @Override
+    public int compareTo(@NonNull AppSetting o) {
+        return Comparator.comparing(AppSetting::getName)
+                .thenComparing(AppSetting::getCode)
+                .thenComparing(AppSetting::getValue)
+                .thenComparing(AppSetting::getType)
+                .compare(this, o);
+    }
 }

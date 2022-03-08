@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto save(UserDto userDto) {
-        UserDto temp = null;
+        UserDto temp ;
         if (userDto.getId() != null){
             userDto.setPassword(createPasswordHash(userDto.getPassword()));
             temp = executor.update(userDto);

@@ -10,7 +10,6 @@ import pl.estrix.shopsync.commons.entity.ListResponseDto;
 import pl.estrix.shopsync.commons.entity.PagingCriteria;
 import pl.estrix.shopsync.model.SettingDto;
 import pl.estrix.shopsync.model.SettingSearchCriteriaDto;
-import pl.estrix.shopsync.model.UserDto;
 import pl.estrix.shopsync.persist.setting.SettingCommandExecutor;
 import pl.estrix.shopsync.service.SettingService;
 

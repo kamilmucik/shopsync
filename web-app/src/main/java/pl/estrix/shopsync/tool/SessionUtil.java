@@ -12,6 +12,8 @@ import java.util.Optional;
 
 public class SessionUtil {
 
+    private SessionUtil(){}
+
     public static String getSessionKey(){
         try {
             HttpServletRequest request =

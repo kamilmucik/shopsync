@@ -10,24 +10,7 @@ public interface SettingMapper {
 
     SettingMapper INSTANCE = Mappers.getMapper(SettingMapper.class);
 
-    @Mappings({
-            @Mapping(target = "name", source = "name"),
-            @Mapping(target = "type", source = "type"),
-            @Mapping(target = "code", source = "code"),
-            @Mapping(target = "value", source = "value")
-    })
     SettingDto map(AppSetting source);
 
-    @AfterMapping
-    default void afterMapping(@MappingTarget SettingDto target, AppSetting source) {
-//        target.setIdMap(source.getId().toString());
-    }
-
-    @Mappings({
-            @Mapping(target = "name", source = "name"),
-            @Mapping(target = "type", source = "type"),
-            @Mapping(target = "code", source = "code"),
-            @Mapping(target = "value", source = "value")
-    })
     AppSetting map(SettingDto source);
 }

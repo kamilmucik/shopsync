@@ -26,7 +26,7 @@ public class SettingRepositoryImpl extends QueryDslRepositorySupportBase impleme
 
     @Override
     public List<AppSetting> find(SettingSearchCriteriaDto searchCriteria, PagingCriteria pagingCriteria) {
-        JPQLQuery query = getQueryForFind(searchCriteria);
+        JPQLQuery<AppSetting> query = getQueryForFind(searchCriteria);
         query.orderBy(getSortedColumn(Order.valueOf(pagingCriteria.getOrderDir()),pagingCriteria.getOrderColumn()));
         addPagingCriteriaToQuery(query, pagingCriteria);
         return query.fetch();
@@ -34,7 +34,7 @@ public class SettingRepositoryImpl extends QueryDslRepositorySupportBase impleme
 
     @Override
     public long findCount(SettingSearchCriteriaDto searchCriteria) {
-        JPQLQuery query = getQueryForFind(searchCriteria);
+        JPQLQuery<AppSetting> query = getQueryForFind(searchCriteria);
         return query.fetchCount();
     }
 
@@ -42,14 +42,14 @@ public class SettingRepositoryImpl extends QueryDslRepositorySupportBase impleme
      * fieldName - name of field from Person entity
      */
     private OrderSpecifier<?> getSortedColumn(Order order, String fieldName){
-        Path<Object> fieldPath = Expressions.path(Object.class, QAppSetting.appSetting, fieldName);
-        return new OrderSpecifier(order, fieldPath);
+        Path<AppSetting> fieldPath = Expressions.path(AppSetting.class, QAppSetting.appSetting, fieldName);
+        return new OrderSpecifier<>(order, fieldPath);
     }
 
-    private JPQLQuery getQueryForFind(SettingSearchCriteriaDto searchParams) {
+    private JPQLQuery<AppSetting> getQueryForFind(SettingSearchCriteriaDto searchParams) {
         BooleanBuilder builder = new BooleanBuilder();
 
-        JPQLQuery query = from(appSetting);
+        JPQLQuery<AppSetting> query = from(appSetting);
 
         if (StringUtils.isNotEmpty(searchParams.getSearch())){
             query.where(

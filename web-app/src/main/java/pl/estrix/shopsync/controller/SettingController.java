@@ -1,66 +1,61 @@
 package pl.estrix.shopsync.controller;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import pl.estrix.shopsync.model.SettingDto;
-import pl.estrix.shopsync.model.UserDto;
 import pl.estrix.shopsync.service.SettingService;
 
 import javax.validation.Valid;
 
 @Slf4j
 @Controller
+@AllArgsConstructor
 @RequestMapping(value = "/setting")
 public class SettingController {
 
-    @Autowired
-    private SettingService settingService;
+    private static final String SITE_INDEX = "setting/index";
+    private static final String SITE_FORM = "setting/form";
+    private static final String SITE_SUCCESS_REDIRECT = "redirect:/setting";
+
+    private final SettingService settingService;
 
     @RequestMapping("")
     public String setting(Model model) {
         model.addAttribute("module","setting");
-        return "setting/index";
+        return SITE_INDEX;
     }
 
     @GetMapping("/form")
-    public String form(
-            SettingDto settingDtoDto,
-            Model model) {
-        return "setting/form";
+    public String form() {
+        return SITE_FORM;
     }
 
     @PostMapping("/save")
-    public String checkInfo(
+    public String save(
             @Valid SettingDto settingDto,
-            BindingResult bindingResult,
-            Model model) {
+            BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            return "setting/form";
+            return SITE_FORM;
         }
         settingService.save(settingDto);
 
-        return "redirect:/setting";
+        return SITE_SUCCESS_REDIRECT;
     }
 
     @RequestMapping("/edit/{id}")
     public String edit(
             SettingDto settingDto,
             Model model){
-//        String session = SessionUtil.getSessionKey();
-//        String ulId = userDto.getIdMap().replace(session,"").substring(1);
-
-//        Long lId = Long.parseLong(ulId);
         settingDto = settingService.getById(settingDto.getId());
         model.addAttribute("settingDto", settingDto);
         model.addAttribute("module","setting");
-        return "setting/form";
+        return SITE_FORM;
     }
 }

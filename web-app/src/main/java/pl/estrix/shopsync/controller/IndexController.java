@@ -6,49 +6,55 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class IndexController {
-//
-//    @Autowired
-//    private PlatformService platformService;
 
     @RequestMapping("/")
     String index(Model model){
-        model.addAttribute("module","home");
+        setModule(model,"home");
         return "index";
     }
 
     @RequestMapping("/admin")
     String admin(Model model){
-        model.addAttribute("module","admin");
+        setModule(model,"admin");
         return "admin/index";
     }
 
     @RequestMapping("/home")
     public String home(Model model) {
-        model.addAttribute("module","home");
+        setModule(model,"home");
         return "home";
     }
 
     @RequestMapping("/about")
     public String about(Model model) {
-        model.addAttribute("module","about");
+        setModule(model,"about");
         return "about";
     }
 
     @RequestMapping("/versions")
     public String versions(Model model) {
-        model.addAttribute("module","versions");
+        setModule(model,"versions");
         return "versions";
     }
 
     @RequestMapping("/login")
     public String login(Model model) {
-        model.addAttribute("module","login");
+        setModule(model,"login");
         return "login";
     }
 
     @RequestMapping("/403")
     public String error403(Model model) {
-        model.addAttribute("module","error404");
+        setModule(model,"error404");
         return "error/403";
+    }
+
+    /**
+     * Set module in model
+     * @param model
+     * @param moduleName
+     */
+    private void setModule(Model model, String moduleName){
+        model.addAttribute("module",moduleName);
     }
 }

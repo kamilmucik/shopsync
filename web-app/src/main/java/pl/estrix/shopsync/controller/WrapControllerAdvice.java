@@ -1,6 +1,6 @@
 package pl.estrix.shopsync.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.boot.info.BuildProperties;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.servlet.http.HttpServletRequest;
 
+@AllArgsConstructor
 @ControllerAdvice
 public class WrapControllerAdvice {
 
-    @Autowired
-    BuildProperties buildProperties;
+    private final BuildProperties buildProperties;
 
     @ModelAttribute
     public void handleRequest(HttpServletRequest request, Model model) {
@@ -26,10 +26,7 @@ public class WrapControllerAdvice {
             model.addAttribute("username", auth.getName());
         }
 
-        //populating request URI in the model
         model.addAttribute("uri", requestURI);
         model.addAttribute("appversion", buildProperties.getVersion());
-
-//        model.addAttribute("platforms",platformService.getAllPlatforms());
     }
 }
