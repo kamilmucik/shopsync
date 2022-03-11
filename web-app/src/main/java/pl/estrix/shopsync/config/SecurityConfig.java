@@ -20,7 +20,7 @@ import pl.estrix.shopsync.service.impl.UserLoginServiceExtImpl;
 @EnableWebSecurity
 @Configuration
 @AllArgsConstructor
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final RoleHierarchy roleHierarchy;
 
@@ -54,14 +54,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(standardPasswordEncoder());
     }
 
-
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/css/**","/js/**","/images/**","/webjars/**","/webfonts/**","/h2/**").permitAll()
                 .antMatchers(
-                        "/", "/home", "/about", "/list", "/version",
+                        "/","/version",
                         "/login").permitAll()
                 .antMatchers(
                         "/admin/**",

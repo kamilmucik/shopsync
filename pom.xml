@@ -35,7 +35,8 @@
     <sonar.projectKey>${project.artifactId}</sonar.projectKey>
     <sonar.buildbreaker.skip>true</sonar.buildbreaker.skip>
     <sonar.exclusions>
-      **/SpringBootWebApplication.java,**/commons/**
+      **/SpringBootWebApplication.java,**/commons/**,
+      **/**Config.java
     </sonar.exclusions>
     <sonar.dependencyCheck.htmlReportPath>./target/dependency-check-report.html</sonar.dependencyCheck.htmlReportPath>
     <sonar.dependencyCheck.jsonReportPath>./target/dependency-check-report.json</sonar.dependencyCheck.jsonReportPath>

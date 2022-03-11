@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.estrix.shopsync.model.SettingDto;
@@ -21,11 +22,11 @@ public class SettingController {
 
     private static final String SITE_INDEX = "setting/index";
     private static final String SITE_FORM = "setting/form";
-    private static final String SITE_SUCCESS_REDIRECT = "redirect:/setting";
+    private static final String SITE_SUCCESS_REDIRECT = "redirect:/setting/";
 
     private final SettingService settingService;
 
-    @RequestMapping("")
+    @GetMapping("/")
     public String setting(Model model) {
         model.addAttribute("module","setting");
         return SITE_INDEX;
@@ -49,11 +50,12 @@ public class SettingController {
         return SITE_SUCCESS_REDIRECT;
     }
 
-    @RequestMapping("/edit/{id}")
+    @GetMapping("/edit/{idMap}")
     public String edit(
-            SettingDto settingDto,
+            @PathVariable(required = false) String idMap,
             Model model){
-        settingDto = settingService.getById(settingDto.getId());
+        Long lId = Long.parseLong(idMap);
+        SettingDto settingDto = settingService.getById(lId);
         model.addAttribute("settingDto", settingDto);
         model.addAttribute("module","setting");
         return SITE_FORM;

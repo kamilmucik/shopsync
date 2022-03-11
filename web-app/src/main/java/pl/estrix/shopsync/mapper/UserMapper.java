@@ -21,4 +21,10 @@ public interface UserMapper {
 
     User map(UserDto source);
 
+    @AfterMapping
+    default void afterMapping(@MappingTarget User target, UserDto source) {
+        target.setFirstName(source.getUserName());
+        target.setLastName(source.getUserLastname());
+    }
+
 }

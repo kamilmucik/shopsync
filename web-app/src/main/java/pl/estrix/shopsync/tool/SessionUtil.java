@@ -1,6 +1,5 @@
 package pl.estrix.shopsync.tool;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -22,7 +21,7 @@ public class SessionUtil {
             Optional<Cookie> sessionId = Arrays.stream(request.getCookies()).filter(cookie -> cookie.getName().equals("JSESSIONID")).findFirst();
             return sessionId.isPresent() ? sessionId.get().getValue() : "";
         }catch (NullPointerException e){
-            return StringUtils.EMPTY;
+            return EStringUtils.DEFAULT_MOCK;
         }
     }
 }

@@ -19,7 +19,6 @@ public class WrapControllerAdvice {
     @ModelAttribute
     public void handleRequest(HttpServletRequest request, Model model) {
         String requestURI = request.getRequestURI();
-        //populating counter in the model
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         if (auth != null) {

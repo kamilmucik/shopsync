@@ -2,50 +2,26 @@ package pl.estrix.shopsync.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class IndexController {
 
-    @RequestMapping("/")
+    @GetMapping("/")
     String index(Model model){
         setModule(model,"home");
         return "index";
     }
 
-    @RequestMapping("/admin")
-    String admin(Model model){
-        setModule(model,"admin");
-        return "admin/index";
-    }
-
-    @RequestMapping("/home")
-    public String home(Model model) {
-        setModule(model,"home");
-        return "home";
-    }
-
-    @RequestMapping("/about")
-    public String about(Model model) {
-        setModule(model,"about");
-        return "about";
-    }
-
-    @RequestMapping("/versions")
-    public String versions(Model model) {
-        setModule(model,"versions");
-        return "versions";
-    }
-
-    @RequestMapping("/login")
+    @GetMapping("/login")
     public String login(Model model) {
         setModule(model,"login");
         return "login";
     }
 
-    @RequestMapping("/403")
+    @GetMapping("/403")
     public String error403(Model model) {
-        setModule(model,"error404");
+        setModule(model,"error403");
         return "error/403";
     }
 

@@ -113,6 +113,12 @@
       <artifactId>groovy-all</artifactId>
       <type>pom</type>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-test -->
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-test</artifactId>
+      <scope>test</scope>
+    </dependency>
 
     <dependency> <!-- enables mocking of classes (in addition to interfaces) -->
       <groupId>net.bytebuddy</groupId>

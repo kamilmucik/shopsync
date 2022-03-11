@@ -27,13 +27,13 @@ public class UserController {
     private static final String SITE_INDEX = "user/index";
     private static final String SITE_PASSWORD = "user/changepassword";
     private static final String SITE_FORM = "user/userform";
-    private static final String SITE_SUCCESS_REDIRECT = "redirect:/user";
+    private static final String SITE_SUCCESS_REDIRECT = "redirect:/user/";
 
     private final UserService userService;
 
     private final PasswordEncoder standardPasswordEncoder;
 
-    @RequestMapping("")
+    @GetMapping("/")
     public String user(Model model) {
         setModule(model,"user");
         return SITE_INDEX;
@@ -47,8 +47,7 @@ public class UserController {
     @PostMapping("/add")
     public String checkInfo(
             @Valid UserDto userDto,
-            BindingResult bindingResult,
-            Model model) {
+            BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             return SITE_FORM;
@@ -58,21 +57,20 @@ public class UserController {
         return SITE_SUCCESS_REDIRECT;
     }
 
-    @RequestMapping("/edit/{idMap}")
+    @GetMapping("/edit/{idMap}")
     public String edit(
-            UserDto userDto,
-            @RequestParam(required = false) String hashId, Model model){
+            @PathVariable(required = false) String idMap, Model model){
         String session = SessionUtil.getSessionKey();
-        String ulId = userDto.getIdMap().replace(session,"").substring(1);
+        String ulId = idMap.replace(session,"").substring(1);
 
         Long lId = Long.parseLong(ulId);
-        userDto = userService.getById(lId);
+        UserDto userDto = userService.getById(lId);
         model.addAttribute("userDto", userDto);
         setModule(model,"platform");
         return SITE_FORM;
     }
 
-    @RequestMapping("/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String delete(@PathVariable Long id, Model model){
         userService.deleteById(id);
         setModule(model,"platform");
@@ -85,8 +83,9 @@ public class UserController {
             Model model) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-        userPasswordDto.setLogin(auth.getName());
+        if (auth != null) {
+            userPasswordDto.setLogin(auth.getName());
+        }
         model.addAttribute(PASSWORD_FIELD,userPasswordDto);
         return SITE_PASSWORD;
     }

@@ -28,3 +28,8 @@ shopsync -> git reset HEAD~1
 ## - kolejka z zadaniami do wykonania
 ## - Podłączenie JMXa jolokia
 ## - 
+
+
+Pomocne:
+https://blog.allegro.tech/2018/04/Spring-WebMvcTest-with-Spock.html
+https://blog.j-labs.pl/2019/05/Test-your-REST-API-with-Spock-Introduction-to-Spock-Framework
