@@ -36,7 +36,7 @@
     <sonar.buildbreaker.skip>true</sonar.buildbreaker.skip>
     <sonar.exclusions>
       **/SpringBootWebApplication.java,**/commons/**,
-      **/**Config.java
+      **/**Config.java,**/tool/**.java
     </sonar.exclusions>
     <sonar.dependencyCheck.htmlReportPath>./target/dependency-check-report.html</sonar.dependencyCheck.htmlReportPath>
     <sonar.dependencyCheck.jsonReportPath>./target/dependency-check-report.json</sonar.dependencyCheck.jsonReportPath>

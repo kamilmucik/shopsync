@@ -11,13 +11,15 @@ import pl.estrix.shopsync.model.UserDto
 import pl.estrix.shopsync.model.UserPasswordDto
 import pl.estrix.shopsync.service.impl.UserServiceImpl
 import pl.estrix.shopsync.tool.EStringUtils
+import pl.estrix.shopsync.tool.UserUtil
 
 class UserControllerSpec extends ControllerSpec {
 
     def userService = Mock(UserServiceImpl)
+    def userUtil = Mock(UserUtil)
     def standardPasswordEncoder = Mock(PasswordEncoder)
     def bindingResult = Mock(BindingResult);
-    def userController = new UserController(userService, standardPasswordEncoder)
+    def userController = new UserController(userService, userUtil, standardPasswordEncoder)
 
     def "should show UserController index page"() {
         given:

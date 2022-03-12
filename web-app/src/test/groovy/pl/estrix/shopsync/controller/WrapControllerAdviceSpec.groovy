@@ -2,40 +2,34 @@ package pl.estrix.shopsync.controller
 
 import org.springframework.boot.info.BuildProperties
 import org.springframework.mock.web.MockHttpServletRequest
-import spock.lang.Specification
+import pl.estrix.shopsync.tool.UserUtil
 
 import java.time.OffsetDateTime
 
-class WrapControllerAdviceSpec extends Specification {
+class WrapControllerAdviceSpec extends ControllerSpec {
 
-//    def buildProperties = prepareBuildProperties()
-//    def controller = new WrapControllerAdvice(buildProperties)
+    def buildProperties = prepareBuildProperties()
+    def userUtil = Mock(UserUtil)
+    def controller = new WrapControllerAdvice(buildProperties, userUtil)
 
-    def "some meaningless test"(){
+    def "Should test default handler"(){
         given:
         def servletRequest = new MockHttpServletRequest()
+        1 * userUtil.getCurrentUserName() >> "userName"
 
         when:
-        1+1
+        controller.handleRequest(servletRequest,createDefaultModel())
 
         then:
         true
     }
 
-//    def BuildProperties prepareBuildProperties() {
-//        final Properties p = new Properties();
-//        p.setProperty("build.time", OffsetDateTime.now().toString())
-//        return new BuildProperties(p)
-//    }
-//    def "should test"() {
-//        given:
-//        def servletRequest = new MockHttpServletRequest()
-//
-//        when:
-//        1+1
-////        controller.handleRequest(servletRequest , null)
-//
-//        then:
-//        true
-//    }
+    def BuildProperties prepareBuildProperties() {
+        final Properties p = new Properties();
+        p.setProperty("build.time", OffsetDateTime.now().toString())
+        p.setProperty("version", "0.0.1")
+        BuildProperties buildProperties = new BuildProperties(p)
+        buildProperties
+    }
+
 }

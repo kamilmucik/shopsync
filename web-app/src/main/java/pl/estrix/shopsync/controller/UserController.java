@@ -2,18 +2,20 @@ package pl.estrix.shopsync.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import pl.estrix.shopsync.model.UserDto;
 import pl.estrix.shopsync.model.UserPasswordDto;
 import pl.estrix.shopsync.service.UserService;
 import pl.estrix.shopsync.tool.SessionUtil;
+import pl.estrix.shopsync.tool.UserUtil;
 
 import javax.validation.Valid;
 
@@ -30,6 +32,8 @@ public class UserController {
     private static final String SITE_SUCCESS_REDIRECT = "redirect:/user/";
 
     private final UserService userService;
+
+    private final UserUtil userUtil;
 
     private final PasswordEncoder standardPasswordEncoder;
 
@@ -82,10 +86,7 @@ public class UserController {
             UserPasswordDto userPasswordDto,
             Model model) {
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null) {
-            userPasswordDto.setLogin(auth.getName());
-        }
+        userPasswordDto.setLogin(userUtil.getCurrentUserName());
         model.addAttribute(PASSWORD_FIELD,userPasswordDto);
         return SITE_PASSWORD;
     }

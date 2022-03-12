@@ -21,6 +21,30 @@ class VersionDtoSpec extends Specification{
         "WASP-12b" | "WASP-12b"
     }
 
+    def "VersionDto: should test allArgsConstructor"(){
+        when:
+        def version = new VersionDto(name)
+
+        then:
+        version.getVersion().equals(expected)
+
+        where:
+        name       | expected
+        "Mercury"  | "Mercury"
+    }
+
+    def "VersionDto: should test Builder"(){
+        when:
+        def version = VersionDto.builder().version(name).build()
+
+        then:
+        version.getVersion().equals(expected)
+
+        where:
+        name       | expected
+        "Mercury"  | "Mercury"
+    }
+
     def "should throw an IllegalArgument exception if invalid name given"() {
         when:
         versionDto.setVersion(null)
