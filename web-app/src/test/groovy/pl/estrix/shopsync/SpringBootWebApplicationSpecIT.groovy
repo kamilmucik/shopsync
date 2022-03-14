@@ -17,7 +17,7 @@ class SpringBootWebApplicationSpecIT extends Specification {
     def "test context loads"() {
         expect:
         context != null
-		context.containsBean("userCommandExecutor")
+//		context.containsBean("userCommandExecutor")
 //		context.containsBean("helloWorldService")
 //		context.containsBean("simpleBootApp")
 //		context.containsBean("scopedHelloWorldService")

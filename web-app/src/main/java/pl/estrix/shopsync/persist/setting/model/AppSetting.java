@@ -19,8 +19,12 @@ import java.util.Comparator;
 public class AppSetting implements Serializable,Comparable<AppSetting> {
 
     @Id
+    @Column(name = "id")
     @GeneratedValue
     private Long id;
+
+    @Column(name = "lastupdate", length = 250, nullable = false)
+    private String lastUpdate;
 
     @Column(name = "setting_name", length = 250, nullable = false)
     private String name;

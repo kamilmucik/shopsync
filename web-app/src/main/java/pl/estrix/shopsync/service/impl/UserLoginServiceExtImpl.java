@@ -1,7 +1,7 @@
 package pl.estrix.shopsync.service.impl;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,10 +18,10 @@ import java.util.List;
 
 @Slf4j
 @Service
+@AllArgsConstructor
 public class UserLoginServiceExtImpl implements UserLoginServiceExt {
 
-    @Autowired
-    private UserCommandExecutor executor;
+    private final UserCommandExecutor executor;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

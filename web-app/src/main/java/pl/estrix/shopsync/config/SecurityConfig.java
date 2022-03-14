@@ -14,6 +14,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import pl.estrix.shopsync.persist.user.executor.UserCommandExecutor;
+import pl.estrix.shopsync.persist.user.repo.UserRepository;
 import pl.estrix.shopsync.service.impl.UserLoginServiceExtImpl;
 
 
@@ -26,6 +28,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final AccessDeniedHandler accessDeniedHandler;
 
+    @Autowired
+    private UserRepository userRepository;
+
     /**
      * BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
      * System.out.println("encoder:  " + encoder.encode("test"));
@@ -36,10 +41,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+//    @Bean(name = "userCommandExecutor")
+    public UserCommandExecutor userCommandExecutor(){
+        return new UserCommandExecutor(userRepository);
+    }
+
     @Override
     @Bean
     public UserDetailsService userDetailsService() {
-        return new UserLoginServiceExtImpl();
+        return new UserLoginServiceExtImpl(userCommandExecutor());
     }
 
     @Bean

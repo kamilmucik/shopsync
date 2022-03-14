@@ -18,7 +18,7 @@ shopsync -> git reset HEAD~1
 ## + testy spock rest, service, DB
 ## + sonarqube
 ## - profile z bazami danych
-## - pokrycie kody >80
+## + pokrycie kody >80
 ## + spring-security
 ## - skrypty flyway
 ## - jmeter

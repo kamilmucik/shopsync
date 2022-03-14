@@ -1,5 +1,6 @@
 package pl.estrix.shopsync.persist.user.executor;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.estrix.shopsync.commons.entity.BaseCommandExecutor;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
+@AllArgsConstructor
 public class UserCommandExecutor extends BaseCommandExecutor<User, UserDto> {
 
     @Autowired
