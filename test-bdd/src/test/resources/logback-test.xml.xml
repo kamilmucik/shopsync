@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <logger name="pl.estrix" level="${LOGLEVEL:-DEBUG}"/>
+    <logger name="pl.estrix" level="${LOGLEVEL:-DEBUG}"/>
+
+    <appender name="STDOUT-JSON" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+    </appender>
+
+    <appender name="STDOUT-TEXT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %X{} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>${ASYNC_QUEUE_SIZE:-256}</queueSize>
+        <!-- 20% is default value in Logback's AsyncAppender -->
+        <discardingThreshold>${ASYNC_DISCARDING_THRESHOLD:-20}</discardingThreshold>
+        <includeCallerData>${ASYNC_INCLUDE_CALLER_DATA:-false}</includeCallerData>
+        <maxFlushTime>${ASYNC_MAX_FLUSH_TIME:-1000}</maxFlushTime>
+        <neverBlock>${ASYNC_NEVER_BLOCK:-true}</neverBlock>
+        <appender-ref ref="STDOUT-${LOGFORMAT:-TEXT}"/>
+    </appender>
+
+    <root level="${LOGLEVEL_ROOT:-DEBUG}">
+        <appender-ref ref="ASYNC"/>
+    </root>
+</configuration>

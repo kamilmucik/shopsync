@@ -12,6 +12,7 @@ class UserDtoSpec extends Specification {
 
         then:
         dto.getIdMap().equals(expected)
+        dto.hashCode() instanceof Integer
 
         where:
         name       | expected
@@ -36,5 +37,39 @@ class UserDtoSpec extends Specification {
 
         then:
         dto.equals(dto2)
+    }
+
+    def "UserDto: should test equal: error 1"() {
+        when:
+        dto.setUserName("name")
+        def dto2 = new UserDto()
+
+        then:
+        !dto.equals(dto2)
+    }
+
+    def "UserDto: should test equal: error 2"() {
+        when:
+        dto.setUserName("name")
+        def dto2 = new SettingDto()
+
+        then:
+        !dto.equals(dto2)
+    }
+
+    def "UserDto: should test equal: same object"() {
+        when:
+        dto.setUserName("name")
+
+        then:
+        dto.equals(dto)
+    }
+
+    def "UserDto: should test equal: error null object"() {
+        when:
+        dto.setUserName("name")
+
+        then:
+        !dto.equals(null)
     }
 }

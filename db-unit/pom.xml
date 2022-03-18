@@ -13,13 +13,44 @@
     <version>0.0.5-SNAPSHOT</version>
   </parent>
 
-  <dependencies>
+  <properties>
+    <flyway.version>3.2.1</flyway.version>
 
+    <env.db.driver>com.mysql.jdbc.Driver</env.db.driver>
+    <env.db.url>jdbc:mysql://localhost:9906/MYSQL_DATABASE</env.db.url>
+    <env.db.username>MYSQL_USER</env.db.username>
+    <env.db.password>MYSQL_PASSWORD</env.db.password>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <scope>runtime</scope>
+    </dependency>
   </dependencies>
 
-  <distributionManagement>
-  </distributionManagement>
-
-  <repositories>
-  </repositories>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.flywaydb</groupId>
+        <artifactId>flyway-maven-plugin</artifactId>
+        <version>${flyway.version}</version>
+        <dependencies>
+          <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>${flyway.version}</version>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <driver>${env.db.driver}</driver>
+          <url>${env.db.url}</url>
+          <user>${env.db.username}</user>
+          <password>${env.db.password}</password>
+          <outOfOrder>true</outOfOrder>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>

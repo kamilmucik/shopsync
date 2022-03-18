@@ -60,6 +60,7 @@
     <module>db-unit</module>
     <module>commons</module>
     <module>web-app</module>
+    <module>test-bdd</module>
   </modules>
 
   <dependencyManagement>

@@ -6,12 +6,12 @@ import pl.estrix.shopsync.commons.entity.BaseEntityDto;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 
 @Getter
 @Setter
-@ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = true)
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -42,4 +42,16 @@ public class UserDto extends BaseEntityDto<String> {
 
     private boolean locked;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserDto that = (UserDto) o;
+        return Objects.equals(userName, that.userName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), userName);
+    }
 }

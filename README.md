@@ -20,14 +20,14 @@ shopsync -> git reset HEAD~1
 ## - profile z bazami danych
 ## + pokrycie kody >80
 ## + spring-security
-## - skrypty flyway
+## + skrypty flyway
 ## - jmeter
 ## - postman
 ## - Api dla mobilki
 ## + panel web
 ## - kolejka z zadaniami do wykonania
 ## - Podłączenie JMXa jolokia
-## - 
+## + BDD- spock + cucumber
 
 
 Pomocne:
