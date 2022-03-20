@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.Comparator;
 
 @Entity
-@Table(name = "appuser",
+@Table(name = "APPUSER",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = {"id"}),
                 @UniqueConstraint(columnNames = {"email"}, name = "uidx_user_email")

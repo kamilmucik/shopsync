@@ -17,7 +17,7 @@ shopsync -> git reset HEAD~1
 ## - mock dla serwisów zewnetrznych
 ## + testy spock rest, service, DB
 ## + sonarqube
-## - profile z bazami danych
+## + profile z bazami danych
 ## + pokrycie kody >80
 ## + spring-security
 ## + skrypty flyway
@@ -33,3 +33,4 @@ shopsync -> git reset HEAD~1
 Pomocne:
 https://blog.allegro.tech/2018/04/Spring-WebMvcTest-with-Spock.html
 https://blog.j-labs.pl/2019/05/Test-your-REST-API-with-Spock-Introduction-to-Spock-Framework
+https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/
