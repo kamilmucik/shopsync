@@ -2,10 +2,10 @@ spring:
   application:
     name: shopsync
   datasource:
-    url: @env.datasource.url@
-    username: @env.datasource.username@
-    password: @env.datasource.password@
-    driverClassName: @env.datasource.driver@
+    url: jdbc:mysql://10.99.106.2:3306/shopsync_e_strix_com
+    username: user
+    password: user
+    driverClassName: com.mysql.cj.jdbc.Driver
   jpa:
     defer-datasource-initialization: true
     spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
@@ -23,6 +23,6 @@ spring:
 server:
   port: 8088
 
-forceApiMock: @pl.estrix.forceApiMock@
+forceApiMock: false
 
 node: 1

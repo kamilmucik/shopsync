@@ -186,9 +186,9 @@
       <id>dbmysql</id>
       <properties>
         <pl.estrix.forceApiMock>true</pl.estrix.forceApiMock>
-        <env.datasource.url>jdbc:mysql://localhost:9906/MYSQL_DATABASE</env.datasource.url>
-        <env.datasource.username>MYSQL_USER</env.datasource.username>
-        <env.datasource.password>MYSQL_PASSWORD</env.datasource.password>
+        <env.datasource.url>jdbc:mysql://localhost:3306/shopsync_e_strix_com</env.datasource.url>
+        <env.datasource.username>user</env.datasource.username>
+        <env.datasource.password>user</env.datasource.password>
         <env.datasource.driver>com.mysql.cj.jdbc.Driver</env.datasource.driver>
       </properties>
       <dependencies>

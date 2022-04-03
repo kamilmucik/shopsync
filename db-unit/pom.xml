@@ -22,9 +22,9 @@
 <!--    <env.db.password>USER_PASSWORD</env.db.password>-->
 
     <env.db.driver>com.mysql.jdbc.Driver</env.db.driver>
-    <env.db.url>jdbc:mysql://localhost:9906/MYSQL_DATABASE</env.db.url>
-    <env.db.username>MYSQL_USER</env.db.username>
-    <env.db.password>MYSQL_PASSWORD</env.db.password>
+    <env.db.url>jdbc:mysql://localhost:3306/shopsync_e_strix_com</env.db.url>
+    <env.db.username>user</env.db.username>
+    <env.db.password>user</env.db.password>
   </properties>
 
   <dependencies>
