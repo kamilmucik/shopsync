@@ -10,6 +10,7 @@ import javax.validation.constraints.Size;
 @Setter
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
+@AllArgsConstructor
 @Builder
 public class UserPasswordDto extends BaseEntityDto<Long> {
 
@@ -24,4 +25,5 @@ public class UserPasswordDto extends BaseEntityDto<Long> {
     @NotNull
     @Size(min=2, max=30)
     private String repeatPassword;
+
 }

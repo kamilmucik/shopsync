@@ -26,7 +26,7 @@ shopsync -> git reset HEAD~1
 ## - Api dla mobilki
 ## + panel web
 ## - kolejka z zadaniami do wykonania
-## - Podłączenie JMXa jolokia
+## + Podłączenie JMXa prometheus
 ## + BDD- spock + cucumber
 
 

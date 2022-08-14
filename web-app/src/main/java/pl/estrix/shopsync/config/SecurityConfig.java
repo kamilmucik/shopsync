@@ -68,9 +68,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/css/**","/js/**","/images/**","/webjars/**","/webfonts/**","/h2/**").permitAll()
+                .antMatchers("/css/**","/js/**","/images/**","/webjars/**","/webfonts/**","/actuator/**").permitAll()
                 .antMatchers(
-                        "/","/version",
+                        "/",
+                        "/version",
                         "/login").permitAll()
                 .antMatchers(
                         "/admin/**",
@@ -78,7 +79,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 )
                         .hasAnyRole("ADMIN")
                 .antMatchers(
-                        "/user/edit/*","/user/**"
+                        "user/edit/*","user/**"
                 )
                         .hasAnyRole("USER","ADMIN")
                 .anyRequest().authenticated()

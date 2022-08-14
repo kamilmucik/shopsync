@@ -2,23 +2,22 @@ spring:
   application:
     name: shopsync
   datasource:
-    url: jdbc:mysql://10.99.106.2:3306/shopsync_e_strix_com
+    url: jdbc:mysql://10.99.206.2:3306/shopsync_e_strix_com
     username: user
     password: user
-    driverClassName: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    testWhileIdle: true
+    testOnBorrow: true
+    validationQuery: SELECT 1
+#    driverClassName: com.mysql.cj.jdbc.Driver
   jpa:
-    defer-datasource-initialization: true
-    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+    database: MYSQL
     show-sql: true
     hibernate:
       ddl-auto: none
       properties:
         hibernate:
-          dialect: org.hibernate.dialect.H2Dialect
-  h2:
-    console:
-      enabled: true
-      path: /h2
+          dialect: org.hibernate.dialect.MySQL5Dialect
 
 server:
   port: 8088

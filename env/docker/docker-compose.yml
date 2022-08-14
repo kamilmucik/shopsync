@@ -1,9 +1,9 @@
 version: '3.3'
 
 services:
-  mysql:
+  mysqlss:
     image: mysql:latest
-    container_name: dev_mysql_j11alpine
+    container_name: mysqlss
     command: mysqld --user=root
     ports:
       - 3306:3306
@@ -15,24 +15,24 @@ services:
     volumes:
       - ./mysql-dump:/docker-entrypoint-initdb.d
     networks:
-      app_net6:
-        ipv4_address: 10.99.106.2
+      app_shopsync:
+        ipv4_address: 10.99.206.2
 
-  phpmyadmin:
+  phpmyadminss:
     image: phpmyadmin/phpmyadmin
-    container_name: dev_pma_j11alpine
+    container_name: phpmyadminss
     links:
-      - mysql
+      - mysqlss
     environment:
-      PMA_HOST: mysql
+      PMA_HOST: mysqlss
       PMA_PORT: 3306
       PMA_ARBITRARY: 1
     restart: always
     ports:
       - 8183:80
     networks:
-      app_net6:
-        ipv4_address: 10.99.106.3
+      app_shopsync:
+        ipv4_address: 10.99.206.3
 
   node1:
     image: shopsync
@@ -40,33 +40,52 @@ services:
     build: ./docker/node1
     volumes:
       - ./logs/node/:/var/log/
-    environment:
-      - TOMCAT_USER=root
-      - TOMCAT_PASSWORD=password
     ports:
       - 8081:8088
+      - 8000:8000
     networks:
-      app_net6:
-        ipv4_address: 10.99.106.4
+      app_shopsync:
+        ipv4_address: 10.99.206.4
+  prometheusss:
+    image: prom/prometheus:v2.35.0
+    container_name: prometheusss
+    restart: unless-stopped
+    volumes:
+      - ./docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+    expose:
+      - 9090
+    ports:
+      - 9090:9090
+    networks:
+      app_shopsync:
+        ipv4_address: 10.99.206.5
+  grafanass:
+    image: grafana/grafana:6.7.0
+    container_name: grafanass
+    expose:
+      - 3000
+    ports:
+      - 3000:3000
+    networks:
+      app_shopsync:
+        ipv4_address: 10.99.206.6
 
-#  node2:
-#    image: jarservice
-#    container_name: jarservice
-#    build: ./docker/service
-#    volumes:
-#      - ./logs/service/:/var/log/
-#    environment:
-#      - TOMCAT_USER=root
-#      - TOMCAT_PASSWORD=password
-#    ports:
-#      - 8082:8088
-#    networks:
-#      app_net6:
-#        ipv4_address: 10.99.106.4
+
+volumes:
+  prometheus_data: { }
+  grafana_data: { }
 
 networks:
-  app_net6:
+  app_shopsync:
     ipam:
       driver: default
       config:
-        - subnet: "10.99.106.0/24"
+        - subnet: "10.99.206.0/24"

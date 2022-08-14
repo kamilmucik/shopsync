@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>pl.estrix.shopsync</groupId>
+        <artifactId>shopsync</artifactId>
+        <version>0.0.5-SNAPSHOT</version>
+    </parent>
+    <artifactId>test-perf</artifactId>
+    <name>Test/Perf</name>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+
+        <jmeterScript>test_proof_001.jmx</jmeterScript>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>local-docker</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <var.shopsync.protocol>http</var.shopsync.protocol>
+                <var.shopsync.url>127.0.0.1</var.shopsync.url>
+                <var.shopsync.port>8081</var.shopsync.port>
+            </properties>
+        </profile>
+        <profile>
+            <id>Echo</id>
+            <properties>
+                <jmeterScript>GRPerfTestScenario-Echo.jmx</jmeterScript>
+                <scenario.max.threads>1</scenario.max.threads>
+                <scenario.duration>600</scenario.duration>
+                <scenario.ramp.up.period>300</scenario.ramp.up.period>
+                <records.number.in.request>50</records.number.in.request>
+            </properties>
+        </profile>
+        <profile>
+            <id>Perf01</id>
+            <properties>
+                <jmeterScript>TestPlan4ADMIN.jmx</jmeterScript>
+                <scenario.max.threads>30</scenario.max.threads>
+                <scenario.duration>600</scenario.duration>
+                <scenario.ramp.up.period>300</scenario.ramp.up.period>
+                <records.number.in.request>50</records.number.in.request>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.lazerycode.jmeter</groupId>
+                <artifactId>jmeter-maven-plugin</artifactId>
+                <version>3.5.0</version>
+                <executions>
+                    <execution>
+                        <id>configuration</id>
+                        <goals>
+                            <goal>configure</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>jmeter-tests</id>
+                        <goals>
+                            <goal>jmeter</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>jmeter-tests2</id>
+                        <goals>
+                            <goal>results</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <jmeterExtensions>
+                        <jmeterExtension>kg.apc:jmeter-plugins-perfmon:2.1</jmeterExtension>
+                    </jmeterExtensions>
+                    <testFilesIncluded>
+                        <jMeterTestFile>${jmeterScript}</jMeterTestFile>
+                    </testFilesIncluded>
+                    <propertiesUser>
+                        <var.strx.protocol>${var.d3s.protocol}</var.strx.protocol>
+                        <var.strx.url>${var.d3s.url}</var.strx.url>
+                        <var.strx.port>${var.d3s.port}</var.strx.port>
+                        <scenario.max.threads>${scenario.max.threads}</scenario.max.threads>
+                        <scenario.duration>${scenario.duration}</scenario.duration>
+                        <scenario.ramp.up.period>${scenario.ramp.up.period}</scenario.ramp.up.period>
+                    </propertiesUser>
+                    <jMeterProcessJVMSettings>
+                        <arguments>
+<!--                            <argument>-Djavax.net.ssl.keyStore=${basedir}/src/test/resources/${var.d3s.keyStore}</argument>-->
+<!--                            <argument>-Djavax.net.ssl.keyStorePassword=${var.d3s.keyStorePass}</argument>-->
+<!--                            <argument>-Djavax.net.ssl.keyStoreType=pkcs12</argument>-->
+                        </arguments>
+                    </jMeterProcessJVMSettings>
+                    <generateReports>true</generateReports>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

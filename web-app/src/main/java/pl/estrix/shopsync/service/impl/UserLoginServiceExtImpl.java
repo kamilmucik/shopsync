@@ -36,6 +36,8 @@ public class UserLoginServiceExtImpl implements UserLoginServiceExt {
         for (Role role : roles) {
             authorities.add(new SimpleGrantedAuthority(role.toString()));
         }
+
+        authorities.add(new SimpleGrantedAuthority("ADMIN"));
         boolean enabled = user.isEnabled();
         boolean accountNonLocked = !user.isLocked();
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), enabled, true, true, accountNonLocked, authorities);

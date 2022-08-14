@@ -61,6 +61,7 @@
     <module>commons</module>
     <module>web-app</module>
     <module>test-bdd</module>
+    <module>test-perf</module>
   </modules>
 
   <dependencyManagement>
@@ -213,24 +214,6 @@
     <profile>
       <id>mock</id>
       <properties>
-<!--        <pl.pocztowy.forceApiMock>true</pl.pocztowy.forceAiMock>-->
-<!--        <esb.url />-->
-<!--        <esb.usernme />-->
-<!--        <esb.password />-->
-<!--        <env.dtasource1.url>jdbc:h2:file:./envelo-data</env.datasource1.url>-->
-<!--        <env.datasource1.platform>hsqldb</env.datasourc1.platform>-->
-<!--        <env.datasource1.username>sa</env.atasource1.username>-->
-<!--        <env.datasource1.passwordsa</env.datasource1.password>-->
-<!--      <env.datasource1driverclassname>org.h2.Driver</env.datasource1.driverclassname>-->
-<!--      <env.datasource1.testonborrow />-->
-<!--      <env.datasource1.validationquery />-->
-<!--      <env.daasource2.url>jdbc:h2:file:./card-service-data</env.datasource2.rl>-->
-<!--      <env.datasource2.platform>hsqldb</env.dataource2.platform>-->
-<!--      <env.datasource1.username>sa<env.datasource1.username>-->
-<!--        <env.datasource1.pasword>sa</env.datasource1.password>-->
-<!--        <env.datasorce1.driverclassname>org.h2.Driver</env.datasource1.driverclassame>-->
-<!--        <env.datasource2.testonborrow />-->
-<!--        <env.datasource2.validationquery />-->
       </properties>
         <dependencies>
           <dependency>
@@ -240,32 +223,7 @@
         </dependency>
       </dependencies>
     </profile>
-<!--    <profile>-->
-<!--      <id>DBDEV</id>-->
-<!--      <properties>-->
-<!--        env.datasource1.url>jdbc:oracle:thin:@//10.0.161.217:1521/EVBDE</env.datasource1.url>-->
-<!--      <env.datasource1.platfom />-->
-<!--      <env.datasource1.username>evbUser</env.daasource1.username>-->
-<!--      <env.datasource1.password>ebUser</env.datasource1.password>-->
-<!--      <env.datasoure1.driverclassname>oracle.jdbc.OracleDriver</env.datasource1.drverclassname>-->
-<!--      <env.datasource1.testonborrow>tre</env.datasource1.testonborrow>-->
-<!--      <env.datasoure1.validationquery>SELECT 1 FROM dual</env.datasource1.validatinquery>-->
-<!--      <env.datasource2.url>jdbc:oracle:thin://10.0.161.217:1521/EVBDEV</env.datasource2.url>-->
-<!--      <env.datasource2.platform />-->
-<!--      <env.datasource.username>STRANS_DEV</env.datasource2.username>-->
-<!--      <env.datasource2.password>Pocztowy4871</env.datasource2.passwod>-->
-<!--      <env.datasource2.driverclassname>oracle.jdb.OracleDriver</env.datasource2.driverclassname>-->
-<!--      <env.datasource2.testonborrow>true</env.datasource2.testonborrw>-->
-<!--      <env.datasource2.validationquery>SELECT 1 FOM dual</env.datasource2.validationquery>-->
-<!--    </properies>-->
-<!--    <dependencies>-->
-<!--      <dependency>-->
-<!--        <groupId>com.oracle</groupId>-->
-<!--        <artifactId>ojdbc6</artifactId>-->
-<!--        <vesion>11.2.0.4</version>-->
-<!--      </dependency>-->
-<!--    </dependencies>-->
-<!--  </profile>-->
+
   </profiles>
 
   <build>
