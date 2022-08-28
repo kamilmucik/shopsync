@@ -15,12 +15,6 @@
 
   <properties>
     <flyway.version>3.2.1</flyway.version>
-
-<!--    <env.db.driver>oracle.jdbc.OracleDriver</env.db.driver>-->
-<!--    <env.db.url>jdbc:oracle:thin:@//127.0.0.1:1521/XE</env.db.url>-->
-<!--    <env.db.username>USER_KAMIL</env.db.username>-->
-<!--    <env.db.password>USER_PASSWORD</env.db.password>-->
-
     <env.db.driver>com.mysql.jdbc.Driver</env.db.driver>
     <env.db.url>jdbc:mysql://localhost:3306/shopsync_e_strix_com</env.db.url>
     <env.db.username>user</env.db.username>
@@ -34,13 +28,6 @@
       <artifactId>mysql-connector-java</artifactId>
       <scope>runtime</scope>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/com.oracle.jdbc/ojdbc8 -->
-<!--    <dependency>-->
-<!--      <groupId>com.oracle.jdbc</groupId>-->
-<!--      <artifactId>ojdbc8</artifactId>-->
-<!--      <version>12.2.0.1</version>-->
-<!--    </dependency>-->
-
   </dependencies>
 
   <build>

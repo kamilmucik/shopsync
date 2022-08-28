@@ -15,7 +15,7 @@
         <aside class="main-sidebar sidebar-light-primary sidebar-collapse">
             <!-- Brand Logo -->
             <a href="#" th:href="@{/}" class="brand-link">
-                <span class="brand-text font-weight-light">Paczki</span>
+                <span class="brand-text font-weight-light">Synchronizacja Sklepów</span>
             </a>
 
             <!-- Sidebar -->
@@ -34,14 +34,6 @@
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" >
-                        <li class="nav-item" th:each="platform : ${platforms}" th:if="${not #lists.isEmpty(platforms)}">
-                            <a href="#" th:href="@{/platform/{platform}(platform=${platform.code})}" class="nav-link" >
-                                <i class="nav-icon fas fa-edit"></i>
-                                <p>
-                                    [[${platform.name}]]
-                                </p>
-                            </a>
-                        </li>
                         <li class="nav-item" sec:authorize="isAuthenticated()">
                             <a href="#" th:href="@{/user/changepassword}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -57,6 +49,18 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="#" th:href="@{/shop/}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Sklep</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" th:href="@{/warehouse/}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Magazyn</p>
+                                    </a>
+                                </li>
                                 <li class="nav-item">
                                     <a href="#" th:href="@{/user/}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>

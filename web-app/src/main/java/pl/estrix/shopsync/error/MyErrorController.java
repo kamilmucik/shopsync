@@ -19,7 +19,7 @@ public class MyErrorController implements ErrorController {
 
         Object exception = request.getAttribute("javax.servlet.error.exception");
         if (String.valueOf(exception) != null) {
-            log.error("Nested Exception: " + String.valueOf(exception));
+            log.error("Nested Exception: " + exception);
         }
 
         if (status != null) {

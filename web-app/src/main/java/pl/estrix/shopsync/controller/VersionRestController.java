@@ -5,7 +5,6 @@ import org.springframework.boot.info.BuildProperties;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.estrix.shopsync.model.VersionDto;
-import pl.estrix.shopsync.service.VersionService;
 
 /**
  * User interfaces for
@@ -16,8 +15,6 @@ import pl.estrix.shopsync.service.VersionService;
 @AllArgsConstructor
 public class VersionRestController {
 
-    private final VersionService versionService;
-
     private final BuildProperties buildProperties;
 
     /**
@@ -26,6 +23,5 @@ public class VersionRestController {
     @GetMapping("/version")
     public VersionDto getVersion(){
         return VersionDto.builder().version(buildProperties.getVersion()).build();
-//        return this.versionService.getVersion("0.0.1");
     }
 }

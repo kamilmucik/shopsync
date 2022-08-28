@@ -21,7 +21,7 @@ shopsync -> git reset HEAD~1
 ## + pokrycie kody >80
 ## + spring-security
 ## + skrypty flyway
-## - jmeter
+## + jmeter
 ## - postman
 ## - Api dla mobilki
 ## + panel web

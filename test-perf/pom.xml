@@ -103,9 +103,6 @@
                     </propertiesUser>
                     <jMeterProcessJVMSettings>
                         <arguments>
-<!--                            <argument>-Djavax.net.ssl.keyStore=${basedir}/src/test/resources/${var.d3s.keyStore}</argument>-->
-<!--                            <argument>-Djavax.net.ssl.keyStorePassword=${var.d3s.keyStorePass}</argument>-->
-<!--                            <argument>-Djavax.net.ssl.keyStoreType=pkcs12</argument>-->
                         </arguments>
                     </jMeterProcessJVMSettings>
                     <generateReports>true</generateReports>
