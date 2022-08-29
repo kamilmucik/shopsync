@@ -28,7 +28,7 @@ shopsync -> git reset HEAD~1
 ## - kolejka z zadaniami do wykonania
 ## + Podłączenie JMXa prometheus
 ## + BDD- spock + cucumber
-
+## - Release Note
 
 Pomocne:
 https://blog.allegro.tech/2018/04/Spring-WebMvcTest-with-Spock.html
