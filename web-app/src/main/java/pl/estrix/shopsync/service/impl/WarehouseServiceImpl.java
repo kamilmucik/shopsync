@@ -56,7 +56,7 @@ public class WarehouseServiceImpl implements WarehouseService {
     @Override
     public WarehouseDto save(WarehouseDto dto) {
         WarehouseDto temp;
-        if (dto.getId() != null && dto.getId() > 0) {
+        if (dto.getId() != null) {
             temp = executor.getById(dto.getId());
         } else {
             temp = new WarehouseDto();

@@ -77,6 +77,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/admin/**",
                         "/setting/add/*","/setting/edit/*","/setting/**",
                         "/shop/add/*","/shop/edit/*","/shop/**",
+                        "/eventlog/**",
+                        "/product/edit/*","/product/**",
                         "/warehouse/add/*","/warehouse/edit/*","/warehouse/**"
                 )
                         .hasAnyRole("ADMIN")

@@ -8,10 +8,10 @@ import pl.estrix.shopsync.commons.core.domain.paging.Page;
 import pl.estrix.shopsync.commons.core.domain.paging.PagingRequest;
 import pl.estrix.shopsync.commons.entity.ListResponseDto;
 import pl.estrix.shopsync.commons.entity.PagingCriteria;
-import pl.estrix.shopsync.model.ShopDto;
-import pl.estrix.shopsync.model.ShopSearchCriteriaDto;
-import pl.estrix.shopsync.persist.shop.ShopCommandExecutor;
-import pl.estrix.shopsync.service.ShopService;
+import pl.estrix.shopsync.model.EventLogDto;
+import pl.estrix.shopsync.model.EventLogSearchCriteriaDto;
+import pl.estrix.shopsync.persist.eventlog.EventLogCommandExecutor;
+import pl.estrix.shopsync.service.EventLogService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,12 +20,12 @@ import java.util.Optional;
 @Slf4j
 @Service
 @AllArgsConstructor
-public class ShopServiceImpl implements ShopService {
+public class EventLogServiceImpl implements EventLogService {
 
-    private final ShopCommandExecutor executor;
+    private final EventLogCommandExecutor executor;
 
     @Override
-    public Page<ShopDto> getList(PagingRequest pagingRequest) {
+    public Page<EventLogDto> getList(PagingRequest pagingRequest) {
         String orderColumn = "id";
         String orderDir = "";
         Optional<Order> order = pagingRequest.getOrder().stream().findFirst();
@@ -34,8 +34,8 @@ public class ShopServiceImpl implements ShopService {
             orderDir = order.get().getDir().name().toUpperCase();
         }
 
-        ListResponseDto<ShopDto> users = executor.find(
-                ShopSearchCriteriaDto.builder()
+        ListResponseDto<EventLogDto> users = executor.find(
+                EventLogSearchCriteriaDto.builder()
                         .search(pagingRequest.getSearch().getValue())
                         .build(),
                 PagingCriteria.builder()
@@ -48,22 +48,19 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public ShopDto getById(Long id) {
+    public EventLogDto getById(Long id) {
         return executor.getById(id);
     }
 
+
     @Override
-    public ShopDto save(ShopDto dto) {
-        ShopDto temp;
+    public EventLogDto save(EventLogDto dto) {
+        EventLogDto temp;
         if (dto.getId() != null) {
             temp = executor.getById(dto.getId());
         } else {
-            temp = new ShopDto();
+            temp = new EventLogDto();
         }
-        temp.setName(dto.getName());
-        temp.setLastUpdate(dto.getName());
-        temp.setUrl(dto.getName());
-        temp.setApiUrl(dto.getName());
         if (dto.getId() != null){
             temp = executor.update(temp);
         } else {
@@ -72,8 +69,8 @@ public class ShopServiceImpl implements ShopService {
         return temp;
     }
 
-    private Page<ShopDto> getPage(List<ShopDto> list, PagingRequest pagingRequest, Integer total) {
-        Page<ShopDto> page = new Page<>(new ArrayList<>());
+    private Page<EventLogDto> getPage(List<EventLogDto> list, PagingRequest pagingRequest, Integer total) {
+        Page<EventLogDto> page = new Page<>(new ArrayList<>());
         page.setData(list);
         page.setRecordsFiltered(total);
         page.setRecordsTotal(total);

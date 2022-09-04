@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+<head lang="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="e-strix Kamil Mucik">
+
+    <title>Synchronizacja sklepów 3</title>
+
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    <script src="/js/common.js" th:src="@{/js/common.js}" ></script>
+    <script src="/js/product/datatable.js" th:src="@{/js/product/datatable.js}" ></script>
+
+    <style>
+
+ /* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 25%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.prod-div {
+
+}
+
+.dataTables_length {
+  width: 50%;
+}
+
+.dataTables_filter {
+  width: 50%;
+}
+    </style>
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+
+    <!--/*/ <th:block th:include="fragments/navbar :: navbar"></th:block> /*/-->
+
+    <!-- Main Sidebar Container -->
+    <!--/*/ <th:block th:include="fragments/leftmenu :: leftmenu"></th:block> /*/-->
+
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Produkt</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#" th:href="@{/}">Home</a></li>
+                            <li class="breadcrumb-item active">Produkt</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+
+                                <table id="productTable" class="display" style="display: none;" cellspacing="0" width="100%"></table>
+                                <div id="new-list">
+                                    <div id="new-row" class="row" style="width: 100%;">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+
+
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+
+    <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+            <b>Version</b> [[${appversion}]]
+        </div>
+        &nbsp;
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+</body>
+</html>
